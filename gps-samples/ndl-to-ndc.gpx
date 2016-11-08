@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+ 
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="bikehike.co.uk" version="1.1" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+
+  <metadata>
+    <time>2016-11-08T14:53:32Z</time>
+    <bounds minlat="48.819300" minlon="2.280380" maxlat="48.845130" maxlon="2.329560" /> 
+  </metadata>
+
+
+  
+  <rte>
+    <name>ndl-to-ndc</name>
+    <number>1</number>
+    <rtept lat="48.845130" lon="2.328560">
+      <ele>0</ele>
+      <time>2016-11-08T14:53:32Z</time>
+      <name>pt0</name>
+    </rtept>
+    <rtept lat="48.843020" lon="2.329200">
+      <ele>0</ele>
+      <time>2016-11-08T14:54:07Z</time>
+      <name>pt1</name>
+    </rtept>
+    <rtept lat="48.841920" lon="2.329560">
+      <ele>0</ele>
+      <time>2016-11-08T14:54:26Z</time>
+      <name>pt2</name>
+    </rtept>
+    <rtept lat="48.841310" lon="2.325230">
+      <ele>0</ele>
+      <time>2016-11-08T14:55:14Z</time>
+      <name>pt3</name>
+    </rtept>
+    <rtept lat="48.841300" lon="2.325020">
+      <ele>0</ele>
+      <time>2016-11-08T14:55:16Z</time>
+      <name>pt4</name>
+    </rtept>
+    <rtept lat="48.841320" lon="2.324910">
+      <ele>0</ele>
+      <time>2016-11-08T14:55:18Z</time>
+      <name>pt5</name>
+    </rtept>
+    <rtept lat="48.841280" lon="2.324870">
+      <ele>0</ele>
+      <time>2016-11-08T14:55:19Z</time>
+      <name>pt6</name>
+    </rtept>
+    <rtept lat="48.842020" lon="2.322820">
+      <ele>0</ele>
+      <time>2016-11-08T14:55:44Z</time>
+      <name>pt7</name>
+    </rtept>
+    <rtept lat="48.842090" lon="2.322680">
+      <ele>0</ele>
+      <time>2016-11-08T14:55:46Z</time>
+      <name>pt8</name>
+    </rtept>
+    <rtept lat="48.841950" lon="2.322490">
+      <ele>0</ele>
+      <time>2016-11-08T14:55:49Z</time>
+      <name>pt9</name>
+    </rtept>
+    <rtept lat="48.841550" lon="2.322020">
+      <ele>0</ele>
+      <time>2016-11-08T14:55:57Z</time>
+      <name>pt10</name>
+    </rtept>
+    <rtept lat="48.841050" lon="2.321390">
+      <ele>0</ele>
+      <time>2016-11-08T14:56:08Z</time>
+      <name>pt11</name>
+    </rtept>
+    <rtept lat="48.841010" lon="2.321370">
+      <ele>0</ele>
+      <time>2016-11-08T14:56:09Z</time>
+      <name>pt12</name>
+    </rtept>
+    <rtept lat="48.840970" lon="2.321360">
+      <ele>0</ele>
+      <time>2016-11-08T14:56:10Z</time>
+      <name>pt13</name>
+    </rtept>
+    <rtept lat="48.840840" lon="2.321390">
+      <ele>0</ele>
+      <time>2016-11-08T14:56:12Z</time>
+      <name>pt14</name>
+    </rtept>
+    <rtept lat="48.840690" lon="2.321470">
+      <ele>0</ele>
+      <time>2016-11-08T14:56:14Z</time>
+      <name>pt15</name>
+    </rtept>
+    <rtept lat="48.840090" lon="2.321690">
+      <ele>0</ele>
+      <time>2016-11-08T14:56:25Z</time>
+      <name>pt16</name>
+    </rtept>
+    <rtept lat="48.839670" lon="2.321190">
+      <ele>0</ele>
+      <time>2016-11-08T14:56:34Z</time>
+      <name>pt17</name>
+    </rtept>
+    <rtept lat="48.839570" lon="2.321120">
+      <ele>0</ele>
+      <time>2016-11-08T14:56:35Z</time>
+      <name>pt18</name>
+    </rtept>
+    <rtept lat="48.838320" lon="2.319630">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:02Z</time>
+      <name>pt19</name>
+    </rtept>
+    <rtept lat="48.837400" lon="2.318570">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:21Z</time>
+      <name>pt20</name>
+    </rtept>
+    <rtept lat="48.837450" lon="2.318400">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:23Z</time>
+      <name>pt21</name>
+    </rtept>
+    <rtept lat="48.837450" lon="2.318250">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:25Z</time>
+      <name>pt22</name>
+    </rtept>
+    <rtept lat="48.837420" lon="2.318110">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:26Z</time>
+      <name>pt23</name>
+    </rtept>
+    <rtept lat="48.837330" lon="2.317970">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:28Z</time>
+      <name>pt24</name>
+    </rtept>
+    <rtept lat="48.837240" lon="2.317920">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:30Z</time>
+      <name>pt25</name>
+    </rtept>
+    <rtept lat="48.837280" lon="2.317350">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:36Z</time>
+      <name>pt26</name>
+    </rtept>
+    <rtept lat="48.837280" lon="2.317130">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:39Z</time>
+      <name>pt27</name>
+    </rtept>
+    <rtept lat="48.837250" lon="2.317000">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:40Z</time>
+      <name>pt28</name>
+    </rtept>
+    <rtept lat="48.837180" lon="2.316840">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:42Z</time>
+      <name>pt29</name>
+    </rtept>
+    <rtept lat="48.836610" lon="2.315910">
+      <ele>0</ele>
+      <time>2016-11-08T14:57:56Z</time>
+      <name>pt30</name>
+    </rtept>
+    <rtept lat="48.836230" lon="2.315460">
+      <ele>0</ele>
+      <time>2016-11-08T14:58:04Z</time>
+      <name>pt31</name>
+    </rtept>
+    <rtept lat="48.836070" lon="2.315350">
+      <ele>0</ele>
+      <time>2016-11-08T14:58:07Z</time>
+      <name>pt32</name>
+    </rtept>
+    <rtept lat="48.835510" lon="2.315420">
+      <ele>0</ele>
+      <time>2016-11-08T14:58:16Z</time>
+      <name>pt33</name>
+    </rtept>
+    <rtept lat="48.835300" lon="2.315140">
+      <ele>0</ele>
+      <time>2016-11-08T14:58:21Z</time>
+      <name>pt34</name>
+    </rtept>
+    <rtept lat="48.834760" lon="2.314290">
+      <ele>0</ele>
+      <time>2016-11-08T14:58:34Z</time>
+      <name>pt35</name>
+    </rtept>
+    <rtept lat="48.834300" lon="2.313500">
+      <ele>0</ele>
+      <time>2016-11-08T14:58:45Z</time>
+      <name>pt36</name>
+    </rtept>
+    <rtept lat="48.833890" lon="2.313020">
+      <ele>0</ele>
+      <time>2016-11-08T14:58:54Z</time>
+      <name>pt37</name>
+    </rtept>
+    <rtept lat="48.832730" lon="2.311540">
+      <ele>0</ele>
+      <time>2016-11-08T14:59:19Z</time>
+      <name>pt38</name>
+    </rtept>
+    <rtept lat="48.831430" lon="2.309270">
+      <ele>0</ele>
+      <time>2016-11-08T14:59:52Z</time>
+      <name>pt39</name>
+    </rtept>
+    <rtept lat="48.831160" lon="2.308860">
+      <ele>0</ele>
+      <time>2016-11-08T14:59:58Z</time>
+      <name>pt40</name>
+    </rtept>
+    <rtept lat="48.829530" lon="2.306830">
+      <ele>0</ele>
+      <time>2016-11-08T15:00:33Z</time>
+      <name>pt41</name>
+    </rtept>
+    <rtept lat="48.828790" lon="2.306050">
+      <ele>0</ele>
+      <time>2016-11-08T15:00:48Z</time>
+      <name>pt42</name>
+    </rtept>
+    <rtept lat="48.828600" lon="2.305620">
+      <ele>0</ele>
+      <time>2016-11-08T15:00:54Z</time>
+      <name>pt43</name>
+    </rtept>
+    <rtept lat="48.828540" lon="2.305520">
+      <ele>0</ele>
+      <time>2016-11-08T15:00:55Z</time>
+      <name>pt44</name>
+    </rtept>
+    <rtept lat="48.827360" lon="2.304060">
+      <ele>0</ele>
+      <time>2016-11-08T15:01:20Z</time>
+      <name>pt45</name>
+    </rtept>
+    <rtept lat="48.827080" lon="2.303770">
+      <ele>0</ele>
+      <time>2016-11-08T15:01:26Z</time>
+      <name>pt46</name>
+    </rtept>
+    <rtept lat="48.826720" lon="2.303460">
+      <ele>0</ele>
+      <time>2016-11-08T15:01:33Z</time>
+      <name>pt47</name>
+    </rtept>
+    <rtept lat="48.826560" lon="2.303340">
+      <ele>0</ele>
+      <time>2016-11-08T15:01:36Z</time>
+      <name>pt48</name>
+    </rtept>
+    <rtept lat="48.826480" lon="2.303300">
+      <ele>0</ele>
+      <time>2016-11-08T15:01:37Z</time>
+      <name>pt49</name>
+    </rtept>
+    <rtept lat="48.826080" lon="2.302700">
+      <ele>0</ele>
+      <time>2016-11-08T15:01:47Z</time>
+      <name>pt50</name>
+    </rtept>
+    <rtept lat="48.825940" lon="2.302550">
+      <ele>0</ele>
+      <time>2016-11-08T15:01:49Z</time>
+      <name>pt51</name>
+    </rtept>
+    <rtept lat="48.825090" lon="2.302200">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:04Z</time>
+      <name>pt52</name>
+    </rtept>
+    <rtept lat="48.824890" lon="2.302100">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:08Z</time>
+      <name>pt53</name>
+    </rtept>
+    <rtept lat="48.824810" lon="2.301940">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:10Z</time>
+      <name>pt54</name>
+    </rtept>
+    <rtept lat="48.824540" lon="2.301150">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:19Z</time>
+      <name>pt55</name>
+    </rtept>
+    <rtept lat="48.824430" lon="2.300980">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:22Z</time>
+      <name>pt56</name>
+    </rtept>
+    <rtept lat="48.823900" lon="2.300350">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:33Z</time>
+      <name>pt57</name>
+    </rtept>
+    <rtept lat="48.823870" lon="2.300260">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:34Z</time>
+      <name>pt58</name>
+    </rtept>
+    <rtept lat="48.823710" lon="2.300060">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:38Z</time>
+      <name>pt59</name>
+    </rtept>
+    <rtept lat="48.823610" lon="2.299970">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:40Z</time>
+      <name>pt60</name>
+    </rtept>
+    <rtept lat="48.823320" lon="2.299760">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:45Z</time>
+      <name>pt61</name>
+    </rtept>
+    <rtept lat="48.823110" lon="2.299550">
+      <ele>0</ele>
+      <time>2016-11-08T15:02:49Z</time>
+      <name>pt62</name>
+    </rtept>
+    <rtept lat="48.821820" lon="2.297870">
+      <ele>0</ele>
+      <time>2016-11-08T15:03:17Z</time>
+      <name>pt63</name>
+    </rtept>
+    <rtept lat="48.821590" lon="2.297540">
+      <ele>0</ele>
+      <time>2016-11-08T15:03:23Z</time>
+      <name>pt64</name>
+    </rtept>
+    <rtept lat="48.821050" lon="2.296840">
+      <ele>0</ele>
+      <time>2016-11-08T15:03:34Z</time>
+      <name>pt65</name>
+    </rtept>
+    <rtept lat="48.820880" lon="2.296650">
+      <ele>0</ele>
+      <time>2016-11-08T15:03:38Z</time>
+      <name>pt66</name>
+    </rtept>
+    <rtept lat="48.820610" lon="2.296410">
+      <ele>0</ele>
+      <time>2016-11-08T15:03:43Z</time>
+      <name>pt67</name>
+    </rtept>
+    <rtept lat="48.820380" lon="2.296160">
+      <ele>0</ele>
+      <time>2016-11-08T15:03:48Z</time>
+      <name>pt68</name>
+    </rtept>
+    <rtept lat="48.820130" lon="2.295920">
+      <ele>0</ele>
+      <time>2016-11-08T15:03:53Z</time>
+      <name>pt69</name>
+    </rtept>
+    <rtept lat="48.819960" lon="2.295790">
+      <ele>0</ele>
+      <time>2016-11-08T15:03:56Z</time>
+      <name>pt70</name>
+    </rtept>
+    <rtept lat="48.819900" lon="2.295690">
+      <ele>0</ele>
+      <time>2016-11-08T15:03:57Z</time>
+      <name>pt71</name>
+    </rtept>
+    <rtept lat="48.819660" lon="2.295590">
+      <ele>0</ele>
+      <time>2016-11-08T15:04:01Z</time>
+      <name>pt72</name>
+    </rtept>
+    <rtept lat="48.819540" lon="2.295570">
+      <ele>0</ele>
+      <time>2016-11-08T15:04:03Z</time>
+      <name>pt73</name>
+    </rtept>
+    <rtept lat="48.819300" lon="2.295590">
+      <ele>0</ele>
+      <time>2016-11-08T15:04:07Z</time>
+      <name>pt74</name>
+    </rtept>
+    <rtept lat="48.819370" lon="2.295060">
+      <ele>0</ele>
+      <time>2016-11-08T15:04:13Z</time>
+      <name>pt75</name>
+    </rtept>
+    <rtept lat="48.819430" lon="2.295030">
+      <ele>0</ele>
+      <time>2016-11-08T15:04:14Z</time>
+      <name>pt76</name>
+    </rtept>
+    <rtept lat="48.819630" lon="2.293680">
+      <ele>0</ele>
+      <time>2016-11-08T15:04:30Z</time>
+      <name>pt77</name>
+    </rtept>
+    <rtept lat="48.820040" lon="2.292050">
+      <ele>0</ele>
+      <time>2016-11-08T15:04:49Z</time>
+      <name>pt78</name>
+    </rtept>
+    <rtept lat="48.820210" lon="2.291470">
+      <ele>0</ele>
+      <time>2016-11-08T15:04:56Z</time>
+      <name>pt79</name>
+    </rtept>
+    <rtept lat="48.820390" lon="2.290970">
+      <ele>0</ele>
+      <time>2016-11-08T15:05:02Z</time>
+      <name>pt80</name>
+    </rtept>
+    <rtept lat="48.820420" lon="2.290960">
+      <ele>0</ele>
+      <time>2016-11-08T15:05:02Z</time>
+      <name>pt81</name>
+    </rtept>
+    <rtept lat="48.820490" lon="2.290870">
+      <ele>0</ele>
+      <time>2016-11-08T15:05:04Z</time>
+      <name>pt82</name>
+    </rtept>
+    <rtept lat="48.820500" lon="2.290690">
+      <ele>0</ele>
+      <time>2016-11-08T15:05:06Z</time>
+      <name>pt83</name>
+    </rtept>
+    <rtept lat="48.820480" lon="2.290640">
+      <ele>0</ele>
+      <time>2016-11-08T15:05:06Z</time>
+      <name>pt84</name>
+    </rtept>
+    <rtept lat="48.821010" lon="2.289170">
+      <ele>0</ele>
+      <time>2016-11-08T15:05:25Z</time>
+      <name>pt85</name>
+    </rtept>
+    <rtept lat="48.821140" lon="2.288680">
+      <ele>0</ele>
+      <time>2016-11-08T15:05:30Z</time>
+      <name>pt86</name>
+    </rtept>
+    <rtept lat="48.821810" lon="2.286780">
+      <ele>0</ele>
+      <time>2016-11-08T15:05:54Z</time>
+      <name>pt87</name>
+    </rtept>
+    <rtept lat="48.821880" lon="2.286490">
+      <ele>0</ele>
+      <time>2016-11-08T15:05:57Z</time>
+      <name>pt88</name>
+    </rtept>
+    <rtept lat="48.822000" lon="2.285680">
+      <ele>0</ele>
+      <time>2016-11-08T15:06:06Z</time>
+      <name>pt89</name>
+    </rtept>
+    <rtept lat="48.822050" lon="2.285200">
+      <ele>0</ele>
+      <time>2016-11-08T15:06:12Z</time>
+      <name>pt90</name>
+    </rtept>
+    <rtept lat="48.822620" lon="2.284540">
+      <ele>0</ele>
+      <time>2016-11-08T15:06:24Z</time>
+      <name>pt91</name>
+    </rtept>
+    <rtept lat="48.824820" lon="2.281900">
+      <ele>0</ele>
+      <time>2016-11-08T15:07:10Z</time>
+      <name>pt92</name>
+    </rtept>
+    <rtept lat="48.824750" lon="2.281790">
+      <ele>0</ele>
+      <time>2016-11-08T15:07:12Z</time>
+      <name>pt93</name>
+    </rtept>
+    <rtept lat="48.824680" lon="2.281780">
+      <ele>0</ele>
+      <time>2016-11-08T15:07:13Z</time>
+      <name>pt94</name>
+    </rtept>
+    <rtept lat="48.824110" lon="2.282050">
+      <ele>0</ele>
+      <time>2016-11-08T15:07:23Z</time>
+      <name>pt95</name>
+    </rtept>
+    <rtept lat="48.823620" lon="2.282220">
+      <ele>0</ele>
+      <time>2016-11-08T15:07:31Z</time>
+      <name>pt96</name>
+    </rtept>
+    <rtept lat="48.823790" lon="2.281980">
+      <ele>0</ele>
+      <time>2016-11-08T15:07:35Z</time>
+      <name>pt97</name>
+    </rtept>
+    <rtept lat="48.824230" lon="2.281500">
+      <ele>0</ele>
+      <time>2016-11-08T15:07:44Z</time>
+      <name>pt98</name>
+    </rtept>
+    <rtept lat="48.824440" lon="2.281240">
+      <ele>0</ele>
+      <time>2016-11-08T15:07:49Z</time>
+      <name>pt99</name>
+    </rtept>
+    <rtept lat="48.824970" lon="2.280380">
+      <ele>0</ele>
+      <time>2016-11-08T15:08:01Z</time>
+      <name>pt100</name>
+    </rtept>
+  </rte>
+</gpx>

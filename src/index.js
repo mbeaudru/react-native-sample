@@ -1,9 +1,9 @@
 import {Scene, Router} from 'react-native-router-flux';
-import Home from './components/Home';
+import TabBar from './components/TabBar';
 import reducers from './reducers';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { navBarStyle } from './utils/styles';
+import colors from './utils/colors';
 import React from 'react';
 
 const store = createStore(reducers);
@@ -13,13 +13,25 @@ const Root = () => (
     <Router>
       <Scene
         key="root"
-        navigationBarStyle={navBarStyle.bar}
-        titleStyle={navBarStyle.title}
+        navigationBarStyle={styles.navBarStyle.bar}
+        titleStyle={styles.navBarStyle.title}
       >
-        <Scene key="home" hideNavBar component={Home} />
+        <Scene key="tabBar" hideNavBar component={TabBar} />
       </Scene>
     </Router>
   </Provider>
 );
+
+const styles = {
+  navBarStyle: {
+    bar: {
+      backgroundColor: colors.primary1
+    },
+    title: {
+      color: 'white',
+      fontWeight: 'bold'
+    }
+  }
+};
 
 export default Root;
