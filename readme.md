@@ -54,6 +54,8 @@ react-native run-android
 
 ## Troubleshooting
 
+**Note:** Each time you pull commits from others, run the **yarn** command to install dependencies that may have been introduced.
+
 ### react-native is not recognized as an internal or external command
 - If your terminal is telling you react-native is not known, try to install it globally with npm: ```npm install -g react-native-cli``` and re-run the above command.
 
@@ -75,16 +77,31 @@ Then click on the line with API Level of value 23 and apply.
 
 ![Install API 23 Instructions](https://i.snag.gy/LtYAR7.jpg)
 
-### failed to find Build Tools revision 23.0.1
+### failed to find Build Tools revision *XX.X.X*
 
-It seems you are missing the build tools at specific revision 23.0.1, so you need to install them. Go to Android Studio SDK Settings (see images above) and click on the SDK Tools snippet.
+It seems you are missing the build tools at specific revision *XX.X.X*, so you need to install them. Go to Android Studio SDK Settings (see images above) and click on the SDK Tools snippet.
 
-Then, click on **Show Package Details** and look for Android SDK Build Tools 23.0.1. Then check if it is installed. If not, install it and this issue should be solved then.
+Then, click on **Show Package Details** and look for Android SDK Build Tools *XX.X.X*. Then check if it is installed. If not, install it and this issue should be solved then.
 
 ![SDK Manager Standalone](https://i.snag.gy/Y3X58Z.jpg)
 
 > **Note:** If it doesn't work as expected, try checking you have not forgotten any of the steps above. If not, please **open an issue and describe your problem**.
 
+### Execution failed for task ':app:dexDebug'
+
+Go into the **android** project's folder in your terminal and run
+
+*Windows*
+```
+gradlew clean
+```
+
+*Linux & Mac*
+```
+./gradlew clean
+```
+
+Then delete the build folder, go back to the project's root folder and try again, this error should be solved.
 
 ## Contributing to the project
 
