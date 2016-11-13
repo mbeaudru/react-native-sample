@@ -85,8 +85,6 @@ Then, click on **Show Package Details** and look for Android SDK Build Tools *XX
 
 ![SDK Manager Standalone](https://i.snag.gy/Y3X58Z.jpg)
 
-> **Note:** If it doesn't work as expected, try checking you have not forgotten any of the steps above. If not, please **open an issue and describe your problem**.
-
 ### Execution failed for task ':app:dexDebug'
 
 Go into the **android** project's folder in your terminal and run
@@ -102,6 +100,8 @@ gradlew clean
 ```
 
 Then delete the build folder, go back to the project's root folder and try again, this error should be solved.
+
+> **Note:** If it doesn't work as expected, try checking you have not forgotten any of the steps above. If not, please **open an issue and describe your problem**.
 
 ## Contributing to the project
 
