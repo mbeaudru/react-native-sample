@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addComment, updateComment } from '../actions/comments';
+import { addComment } from '../actions/comments';
 import MapScreen from '../components/MapScreen';
 
 export default connect(
@@ -7,5 +7,5 @@ export default connect(
     const commentsArray = Object.keys(comments).map(key => comments[key]);
     return { comments: commentsArray };
   },
-  { addComment, updateComment },
+  { addComment },
 )(MapScreen);

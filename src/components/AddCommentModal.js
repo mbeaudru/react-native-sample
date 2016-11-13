@@ -33,7 +33,7 @@ class AddCommentModal extends React.Component {
             title="Create comment"
             buttonStyle={styles.submitBtn}
             onPress={() => {
-              this.props.upsertComment(this.state.commentForm);
+              this.props.addComment(this.state.commentForm);
               this.setState({ commentForm: {} });
             }}
           />
@@ -43,7 +43,7 @@ class AddCommentModal extends React.Component {
   }
 
   static propTypes = {
-    upsertComment: React.PropTypes.func,
+    addComment: React.PropTypes.func,
     visible: React.PropTypes.bool
   }
 

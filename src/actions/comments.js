@@ -1,15 +1,19 @@
 import * as types from '../utils/constants';
 
 export function addComment(comment) {
-  return {
-    type: types.ADD_COMMENT,
-    comment
+  return dispatch => {
+    // Insert the comment into DB and then call this dispatch
+
+    dispatch({
+      type: types.ADD_COMMENT,
+      comment
+    });
   };
 }
 
-export function updateComment(comment) {
+export function deleteComment(comment) {
   return {
-    type: types.UPDATE_COMMENT,
+    type: types.DELETE_COMMENT,
     comment
   };
 }

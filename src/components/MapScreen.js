@@ -56,7 +56,7 @@ class MapScreen extends React.Component {
         </ActionButton>
 
         <AddCommentModal
-          upsertComment={this.upsertComment}
+          addComment={this.addComment}
           visible={this.state.upsertingComment}
         />
 
@@ -81,7 +81,7 @@ class MapScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.upsertComment = this.upsertComment.bind(this);
+    this.addComment = this.addComment.bind(this);
     this.updateRegion = this.updateRegion.bind(this);
     this.watchPosition = this.watchPosition.bind(this);
     this.clearWatchPosition = this.clearWatchPosition.bind(this);
@@ -105,9 +105,13 @@ class MapScreen extends React.Component {
     this.clearWatchPosition();
   }
 
-  upsertComment(commentForm) {
+  addComment(commentForm) {
     const comment = Object.assign(
-      {}, { id: v1(), coordinate: this.state.region }, commentForm);
+      {},
+      { id: v1(), coordinate: this.state.region },
+      commentForm
+    );
+
     this.props.addComment(comment);
     this.setState({ upsertingComment: false });
   }
