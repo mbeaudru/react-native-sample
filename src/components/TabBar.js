@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs, Tab, Icon } from 'react-native-elements';
-import MapScreen from './MapScreen';
+import MapScreen from '../containers/MapScreen';
 import { Text, View } from 'react-native';
 import colors from '../utils/colors';
 
