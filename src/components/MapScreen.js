@@ -2,15 +2,14 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Modal,
-  Text,
   Image
 } from 'react-native';
 import MapView from 'react-native-maps';
-import { Icon, Button, FormLabel, FormInput } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import { v1 } from 'node-uuid';
 import colors from '../utils/colors';
+import AddCommentModal from './AddCommentModal';
 
 class MapScreen extends React.Component {
 
@@ -18,7 +17,7 @@ class MapScreen extends React.Component {
     const commentMarker = (
       <Image
         source={require('../assets/markers/comment-map-icon.png')}
-        style={{ width: 32, height: 37 }}
+        style={styles.commentMarker}
       />
     );
     return (
@@ -56,35 +55,10 @@ class MapScreen extends React.Component {
           </ActionButton.Item>
         </ActionButton>
 
-        <Modal
-          animationType={"slide"}
-          transparent={false}
+        <AddCommentModal
+          upsertComment={this.upsertComment}
           visible={this.state.upsertingComment}
-          onRequestClose={() => {}}
-        >
-          <View>
-            <Text style={styles.headerTitle}>New comment</Text>
-            <FormLabel>Title</FormLabel>
-            <FormInput
-              value={this.state.commentForm.title}
-              onChangeText={
-                (value) => this.updateCommentForm('title', value)
-              }
-            />
-            <FormLabel>Description</FormLabel>
-            <FormInput
-              value={this.state.commentForm.description}
-              onChangeText={
-                (value) => this.updateCommentForm('description', value)
-              }
-            />
-            <Button
-              title="Create comment"
-              buttonStyle={styles.submitBtn}
-              onPress={() => this.upsertComment()}
-            />
-          </View>
-        </Modal>
+        />
 
       </View>
     );
@@ -92,7 +66,6 @@ class MapScreen extends React.Component {
 
   static propTypes = {
     addComment: React.PropTypes.func,
-    updateComment: React.PropTypes.func,
     comments: React.PropTypes.arrayOf(
       React.PropTypes.shape({
         coordinate: React.PropTypes.object,
@@ -105,6 +78,15 @@ class MapScreen extends React.Component {
     comments: []
   }
 
+  constructor(props) {
+    super(props);
+
+    this.upsertComment = this.upsertComment.bind(this);
+    this.updateRegion = this.updateRegion.bind(this);
+    this.watchPosition = this.watchPosition.bind(this);
+    this.clearWatchPosition = this.clearWatchPosition.bind(this);
+  }
+
   state = {
     region: {
       latitude: 48.85663,
@@ -112,11 +94,37 @@ class MapScreen extends React.Component {
       latitudeDelta: 0.1,
       longitudeDelta: 0.1
     },
-    upsertingComment: false,
-    commentForm: {}
+    upsertingComment: false
   };
 
   componentDidMount() {
+    this.watchPosition();
+  }
+
+  componentWillUnmount() {
+    this.clearWatchPosition();
+  }
+
+  upsertComment(commentForm) {
+    const comment = Object.assign(
+      {}, { id: v1(), coordinate: this.state.region }, commentForm);
+    this.props.addComment(comment);
+    this.setState({ upsertingComment: false });
+  }
+
+  updateRegion({ coords = this.state.region }) {
+    const { latitude, longitude } = coords;
+    const region = Object.assign(
+      {},
+      { latitude, longitude },
+      { latitudeDelta: 0.01, longitudeDelta: 0.01}
+    );
+    this.setState({ region });
+  }
+
+  watchID: ?number = null;
+
+  watchPosition() {
     navigator.geolocation.getCurrentPosition(
       ({ coords = this.state.region }) => {
         const { latitude, longitude } = coords;
@@ -134,36 +142,8 @@ class MapScreen extends React.Component {
       .watchPosition(position => this.updateRegion(position));
   }
 
-  componentWillUnmount() {
+  clearWatchPosition() {
     navigator.geolocation.clearWatch(this.watchID);
-  }
-
-  watchID: ?number = null;
-
-  upsertComment() {
-    const comment = Object.assign(
-      {}, { id: v1(), coordinate: this.state.region }, this.state.commentForm);
-    console.log(this.state.region);
-    this.props.addComment(comment);
-    this.setState({ upsertingComment: false });
-  }
-
-  updateRegion({ coords = this.state.region }) {
-    const { latitude, longitude } = coords;
-    const region = Object.assign(
-      {},
-      { latitude, longitude },
-      { latitudeDelta: 0.01, longitudeDelta: 0.01}
-    );
-    this.setState({ region });
-  }
-
-  updateCommentForm(field, value) {
-    const commentForm = Object.assign(
-      {}, this.state.commentForm, { [`${field}`]: value }
-    );
-
-    this.setState({ commentForm });
   }
 
 }
@@ -176,15 +156,9 @@ const styles = StyleSheet.create({
     flex: 1,
     ...StyleSheet.absoluteFillObject
   },
-  submitBtn: {
-    backgroundColor: colors.primary2,
-    marginTop: 15
-  },
-  headerTitle: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 15
+  commentMarker: {
+    width: 32,
+    height: 37
   }
 });
 

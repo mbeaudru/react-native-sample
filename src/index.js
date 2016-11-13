@@ -1,12 +1,17 @@
 import {Scene, Router} from 'react-native-router-flux';
 import TabBar from './components/TabBar';
 import reducers from './reducers';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'remote-redux-devtools';
 import { Provider } from 'react-redux';
 import colors from './utils/colors';
 import React from 'react';
 
-const store = createStore(reducers);
+const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 const Root = () => (
   <Provider store={store}>
