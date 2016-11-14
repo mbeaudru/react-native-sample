@@ -10,12 +10,12 @@ class CommentsList extends React.Component {
         <List>
           {
             this.props.comments
-              .map(({ title, description, authorAvatar }, key) =>
+              .map(({ title, description, authorAvatar, authorName }, key) =>
                 <ListItem
                   key={key}
                   roundAvatar
                   avatar={authorAvatar}
-                  title={title}
+                  title={authorName}
                   subtitle={description}
                 />
             )

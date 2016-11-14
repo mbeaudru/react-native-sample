@@ -19,7 +19,6 @@ class MapScreen extends React.Component {
           style={styles.map}
           showsUserLocation
           zoomEnabled={false}
-          scrollEnabled={false}
           mapType="terrain"
           showsMyLocationButton
           initialRegion={this.state.region}
@@ -30,7 +29,7 @@ class MapScreen extends React.Component {
               key={key}
               pinColor={colors.primary1}
               coordinate={comment.coordinate}
-              title={comment.title}
+              title={comment.authorName}
               description={comment.description}
             >
               <View>

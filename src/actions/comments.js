@@ -1,18 +1,19 @@
 import * as types from '../utils/constants';
-import faker from 'faker';
+import _ from 'lodash';
 
-export function addComment(comment) {
-  return dispatch => {
+export function addComment(comment = {}) {
+  return (dispatch, getState) => {
     // TODO: Insert the comment into DB and then call this dispatch
+    const author = _.get(getState(), ['users', comment.authorId], {});
+    const { avatar, username: authorName } = author;
 
-    const commentWithMeta = Object.assign(
-      {}, comment,
-      {
-        createdAt: new Date(),
-        // TODO: Fetch author metaData
-        authorAvatar: faker.image.avatar()
-      }
-    );
+    const commentsMeta = {
+      createdAt: new Date(),
+      authorAvatar: avatar,
+      authorName
+    };
+
+    const commentWithMeta = Object.assign({}, comment, commentsMeta);
 
     dispatch({
       type: types.ADD_COMMENT,

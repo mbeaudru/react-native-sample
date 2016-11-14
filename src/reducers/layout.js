@@ -2,7 +2,7 @@ const initialState = {
   addCommentModalVisible: false
 };
 
-export default function comments(state = initialState, action) {
+export default function layout(state = initialState, action) {
   switch(action.type) {
     case 'TOGGLE_ADD_COMMENT_MODAL_VISIBILITY': {
       const addCommentModalVisible = !state.addCommentModalVisible;

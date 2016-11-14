@@ -15,13 +15,6 @@ class AddCommentModal extends React.Component {
       >
         <View>
           <Text style={styles.headerTitle}>New comment</Text>
-          <FormLabel>Title</FormLabel>
-          <FormInput
-            value={this.state.commentForm.title}
-            onChangeText={
-              (value) => this.updateCommentForm('title', value)
-            }
-          />
           <FormLabel>Description</FormLabel>
           <FormInput
             value={this.state.commentForm.description}
