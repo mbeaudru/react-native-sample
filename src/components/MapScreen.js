@@ -83,10 +83,10 @@ class MapScreen extends React.Component {
 
   state = {
     region: {
-      latitude: 48.85663,
-      longitude: 2.352241,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01
+      latitude: 48.884,
+      longitude: 2.353,
+      latitudeDelta: 0.005,
+      longitudeDelta: 0.005
     },
     upsertingComment: false
   };
