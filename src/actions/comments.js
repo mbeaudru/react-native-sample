@@ -1,12 +1,22 @@
 import * as types from '../utils/constants';
+import faker from 'faker';
 
 export function addComment(comment) {
   return dispatch => {
-    // Insert the comment into DB and then call this dispatch
+    // TODO: Insert the comment into DB and then call this dispatch
+
+    const commentWithMeta = Object.assign(
+      {}, comment,
+      {
+        createdAt: new Date(),
+        // TODO: Fetch author metaData
+        authorAvatar: faker.image.avatar()
+      }
+    );
 
     dispatch({
       type: types.ADD_COMMENT,
-      comment
+      comment: commentWithMeta
     });
   };
 }

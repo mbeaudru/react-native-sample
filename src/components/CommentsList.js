@@ -8,13 +8,18 @@ class CommentsList extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <List>
-          {this.props.comments.map(({ title, description }, key) =>
-            <ListItem
-              key={key}
-              title={title}
-              subtitle={description}
-            />
-          )}
+          {
+            this.props.comments
+              .map(({ title, description, authorAvatar }, key) =>
+                <ListItem
+                  key={key}
+                  roundAvatar
+                  avatar={authorAvatar}
+                  title={title}
+                  subtitle={description}
+                />
+            )
+          }
         </List>
       </ScrollView>
     );

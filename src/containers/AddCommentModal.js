@@ -34,11 +34,18 @@ class AddCommentModalHOC extends React.Component {
   }
 
   addComment(commentForm) {
+    // TODO: Get real userId
+    const userId = "userIdFromUrlOrElse";
     const comment = Object.assign(
       {},
-      { id: v1(), coordinate: this.props.coordinate },
+      {
+        id: v1(),
+        coordinate: this.props.coordinate,
+        author: userId
+      },
       commentForm
     );
+
     this.props.addComment(comment);
     this.props.toggleAddCommentModalVisibility();
   }
