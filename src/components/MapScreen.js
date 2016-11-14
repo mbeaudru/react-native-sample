@@ -1,31 +1,26 @@
 import React from 'react';
 import {
   StyleSheet,
-  View,
-  Image
+  View
 } from 'react-native';
 import MapView from 'react-native-maps';
 import { Icon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
-import { v1 } from 'node-uuid';
 import colors from '../utils/colors';
-import AddCommentModal from './AddCommentModal';
+import AddCommentModal from '../containers/AddCommentModal';
 
 class MapScreen extends React.Component {
 
   render() {
-    const commentMarker = (
-      <Image
-        source={require('../assets/markers/comment-map-icon.png')}
-        style={styles.commentMarker}
-      />
-    );
     return (
       <View style={styles.container}>
 
         <MapView
           style={styles.map}
           showsUserLocation
+          zoomEnabled={false}
+          scrollEnabled={false}
+          mapType="terrain"
           showsMyLocationButton
           initialRegion={this.state.region}
           region={this.state.region}
@@ -39,7 +34,7 @@ class MapScreen extends React.Component {
               description={comment.description}
             >
               <View>
-                {commentMarker}
+                <Icon name="chat" size={26} color={colors.primary2} />
               </View>
             </MapView.Marker>
           )}
@@ -49,7 +44,7 @@ class MapScreen extends React.Component {
           <ActionButton.Item
             buttonColor="#9b59b6"
             title="Add a comment"
-            onPress={() =>  this.setState({ upsertingComment: true })}
+            onPress={() => this.props.toggleAddCommentModalVisibility()}
           >
             <Icon name="create" color="white" />
           </ActionButton.Item>
@@ -57,6 +52,7 @@ class MapScreen extends React.Component {
 
         <AddCommentModal
           addComment={this.addComment}
+          coordinate={this.state.region}
           visible={this.state.upsertingComment}
         />
 
@@ -65,13 +61,13 @@ class MapScreen extends React.Component {
   }
 
   static propTypes = {
-    addComment: React.PropTypes.func,
     comments: React.PropTypes.arrayOf(
       React.PropTypes.shape({
         coordinate: React.PropTypes.object,
         title: React.PropTypes.string
       })
-    )
+    ),
+    toggleAddCommentModalVisibility: React.PropTypes.func
   }
 
   static defaultProps = {
@@ -81,7 +77,6 @@ class MapScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.addComment = this.addComment.bind(this);
     this.updateRegion = this.updateRegion.bind(this);
     this.watchPosition = this.watchPosition.bind(this);
     this.clearWatchPosition = this.clearWatchPosition.bind(this);
@@ -91,8 +86,8 @@ class MapScreen extends React.Component {
     region: {
       latitude: 48.85663,
       longitude: 2.352241,
-      latitudeDelta: 0.1,
-      longitudeDelta: 0.1
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01
     },
     upsertingComment: false
   };
@@ -105,23 +100,12 @@ class MapScreen extends React.Component {
     this.clearWatchPosition();
   }
 
-  addComment(commentForm) {
-    const comment = Object.assign(
-      {},
-      { id: v1(), coordinate: this.state.region },
-      commentForm
-    );
-
-    this.props.addComment(comment);
-    this.setState({ upsertingComment: false });
-  }
-
   updateRegion({ coords = this.state.region }) {
     const { latitude, longitude } = coords;
     const region = Object.assign(
       {},
       { latitude, longitude },
-      { latitudeDelta: 0.01, longitudeDelta: 0.01}
+      { latitudeDelta: 0.005, longitudeDelta: 0.005}
     );
     this.setState({ region });
   }
@@ -159,10 +143,6 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
     ...StyleSheet.absoluteFillObject
-  },
-  commentMarker: {
-    width: 32,
-    height: 37
   }
 });
 
