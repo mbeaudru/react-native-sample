@@ -1,6 +1,6 @@
 import faker from 'faker';
 
-const initialState = [...Array(50)]
+const initialState = [...Array(10)]
   .map(() => ({
     [`${faker.random.uuid()}`]: {
       id: faker.random.uuid(),
