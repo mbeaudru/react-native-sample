@@ -11,7 +11,7 @@ const initialState = [...Array(10)]
           username: faker.name.firstName(),
           avatar: faker.image.avatar()
         },
-        description: faker.lorem.words(),
+        description: faker.lorem.sentences(),
         coordinate: {
           latitude: 48.884 + (Math.random() - 0.5) * 0.01,
           longitude: 2.353 + (Math.random() - 0.5) * 0.01,

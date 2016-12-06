@@ -4740,9 +4740,9 @@ react-native-action-button:
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/react-native-action-button/-/react-native-action-button-2.0.14.tgz#a18af8bc0cf3c30632a6f43a366c7cc7a74d24c0"
 
-react-native-elements@^0.6.0:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-0.6.2.tgz#5c66ec53090425a74c341ddc11ce660b17e420f6"
+react-native-elements:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-0.7.1.tgz#33111db698f4c2e030b540c90d673ad3f67f84e9"
   dependencies:
     react-native-tab-navigator "^0.3.3"
 
