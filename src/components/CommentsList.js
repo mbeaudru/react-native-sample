@@ -10,15 +10,19 @@ class CommentsList extends React.Component {
         <List>
           {
             this.props.comments
-              .map(({ title, description, authorAvatar, authorName }, key) =>
-                <ListItem
-                  key={key}
-                  roundAvatar
-                  avatar={authorAvatar}
-                  title={authorName}
-                  subtitle={description}
-                />
-            )
+              .map((comment, key) => {
+                const { description, author } = comment;
+                return (
+                  <ListItem
+                    key={key}
+                    roundAvatar
+                    avatar={author.avatar}
+                    title={author.username}
+                    subtitle={description}
+                    onPress={() => this.props.onCommentClick(comment)}
+                  />
+                );
+              })
           }
         </List>
       </ScrollView>
@@ -29,9 +33,14 @@ class CommentsList extends React.Component {
     comments: React.PropTypes.arrayOf(
       React.PropTypes.shape({
         title: React.PropTypes.string,
-        description: React.PropTypes.string
+        description: React.PropTypes.string,
+        avatar: React.PropTypes.shape({
+          username: React.PropTypes.string,
+          avatar: React.PropTypes.string
+        })
       })
-    )
+    ),
+    onCommentClick: React.PropTypes.func
   }
 
 }

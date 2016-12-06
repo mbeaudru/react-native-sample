@@ -29,7 +29,7 @@ class MapScreen extends React.Component {
               key={key}
               pinColor={colors.primary1}
               coordinate={comment.coordinate}
-              title={comment.authorName}
+              title={comment.author.username}
               description={comment.description}
             >
               <View>
@@ -63,7 +63,10 @@ class MapScreen extends React.Component {
     comments: React.PropTypes.arrayOf(
       React.PropTypes.shape({
         coordinate: React.PropTypes.object,
-        title: React.PropTypes.string
+        title: React.PropTypes.string,
+        author: React.PropTypes.shape({
+          username: React.PropTypes.string
+        })
       })
     ),
     toggleAddCommentModalVisibility: React.PropTypes.func

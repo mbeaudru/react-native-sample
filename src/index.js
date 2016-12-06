@@ -1,5 +1,6 @@
 import {Scene, Router} from 'react-native-router-flux';
 import TabBar from './components/TabBar';
+import CommentPage from './containers/CommentPage';
 import reducers from './reducers';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -22,6 +23,7 @@ const Root = () => (
         titleStyle={styles.navBarStyle.title}
       >
         <Scene key="tabBar" hideNavBar component={TabBar} />
+        <Scene key="commentPage" hideNavBar component={CommentPage} />
       </Scene>
     </Router>
   </Provider>
