@@ -43,7 +43,8 @@ class AddCommentModalHOC extends React.Component {
         coordinate: this.props.coordinate,
         author: {
           id: userId
-        }
+        },
+        replies: []
       },
       commentForm
     );

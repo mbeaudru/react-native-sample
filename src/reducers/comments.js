@@ -17,7 +17,19 @@ const initialState = [...Array(10)]
           longitude: 2.353 + (Math.random() - 0.5) * 0.01,
           latitudeDelta: 0.005,
           longitudeDelta: 0.005
-        }
+        },
+        replies: [...Array(5)].map(() => {
+          const id2 = faker.random.uuid();
+          return {
+            id2,
+            author: {
+              id: faker.random.uuid(),
+              username: faker.name.firstName(),
+              avatar: faker.image.avatar()
+            },
+            description: faker.lorem.sentences()
+          };
+        })
       }
     });
   })

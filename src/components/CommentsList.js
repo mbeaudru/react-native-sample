@@ -1,6 +1,7 @@
 import React from 'react';
 import { List, ListItem } from 'react-native-elements';
 import { ScrollView } from 'react-native';
+import _ from 'lodash';
 
 class CommentsList extends React.Component {
 
@@ -12,14 +13,13 @@ class CommentsList extends React.Component {
             this.props.comments
               .map((comment, key) => {
                 const { description, author } = comment;
-                const content = description.slice(0, 45) + '...';
                 return (
                   <ListItem
                     key={key}
                     roundAvatar
                     avatar={author.avatar}
                     title={author.username}
-                    subtitle={content}
+                    subtitle={_.truncate(description, { length: 45 })}
                     onPress={() => this.props.onCommentClick(comment)}
                   />
                 );

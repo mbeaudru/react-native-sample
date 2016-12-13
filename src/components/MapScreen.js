@@ -8,6 +8,7 @@ import { Icon } from 'react-native-elements';
 import ActionButton from 'react-native-action-button';
 import colors from '../utils/colors';
 import AddCommentModal from '../containers/AddCommentModal';
+import _ from 'lodash';
 
 class MapScreen extends React.Component {
 
@@ -30,7 +31,8 @@ class MapScreen extends React.Component {
               pinColor={colors.primary1}
               coordinate={comment.coordinate}
               title={comment.author.username}
-              description={comment.description}
+              description={_.truncate(comment.description)}
+              onCalloutPress={() => this.props.onCommentPress(comment)}
             >
               <View>
                 <Icon name="chat" size={26} color={colors.primary2} />
@@ -69,11 +71,13 @@ class MapScreen extends React.Component {
         })
       })
     ),
-    toggleAddCommentModalVisibility: React.PropTypes.func
+    toggleAddCommentModalVisibility: React.PropTypes.func,
+    onCommentPress: React.PropTypes.func
   }
 
   static defaultProps = {
-    comments: []
+    comments: [],
+    onCommentPress: () => ({})
   }
 
   constructor(props) {
