@@ -1,6 +1,7 @@
 import {Scene, Router} from 'react-native-router-flux';
 import TabBar from './components/TabBar';
 import CommentPage from './containers/CommentPage';
+import UserProfile from './containers/UserProfile';
 import reducers from './reducers';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -24,6 +25,7 @@ const Root = () => (
       >
         <Scene key="tabBar" hideNavBar component={TabBar} />
         <Scene key="commentPage" hideNavBar component={CommentPage} />
+        <Scene key="userProfile" hideNavBar component={UserProfile} />
       </Scene>
     </Router>
   </Provider>

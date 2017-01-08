@@ -1,21 +1,52 @@
 import * as types from '../utils/constants';
-import _ from 'lodash';
+import { SERVER_URL } from '../utils/server-configuration';
+
+export function fetchNearComments() {
+  return dispatch => {
+    // TODO: Remove expand parameter in prod
+    fetch(SERVER_URL+'/comments?_expand=user')
+      .then(res => res.json())
+      .then(comments => dispatch({
+        type: types.FETCH_COMMENTS,
+        comments
+      }))
+      .catch(err => console.error(err));
+  };
+}
+
+export function fetchCommentById(commentId) {
+  return dispatch => {
+    fetch(`${SERVER_URL}/comments/${commentId}`)
+      .then(res => res.json())
+      .then(comment => dispatch({
+        type: types.FETCH_COMMENT,
+        comment
+      }))
+      .catch(err => console.error(err));
+  };
+}
 
 export function addComment(comment = {}) {
   return (dispatch, getState) => {
-    // TODO: Insert the comment into DB and then call this dispatch
-    const author = _.get(getState(), ['users', comment.author.id], {});
-    const commentsMeta = {
-      createdAt: new Date(),
-      author
-    };
-
-    const commentWithMeta = Object.assign({}, comment, commentsMeta);
-
-    dispatch({
-      type: types.ADD_COMMENT,
-      comment: commentWithMeta
-    });
+    fetch(`${SERVER_URL}/comments`, {
+      method: "POST",
+      body: JSON.stringify(comment),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(() => {
+      // TODO: Remove expand parameter in prod
+      fetch(SERVER_URL+'/comments?_expand=user')
+        .then(res => res.json())
+        .then(comments => dispatch({
+          type: types.FETCH_COMMENTS,
+          comments
+        }))
+        .catch(err => console.error(err));
+    })
+    .catch(err => console.error(err));
   };
 }
 

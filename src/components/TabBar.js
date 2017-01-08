@@ -1,7 +1,8 @@
 import React from 'react';
 import { Tabs, Tab, Icon } from 'react-native-elements';
 import MapScreen from '../containers/MapScreen';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import UsersSeen from '../containers/UsersSeen';
 import colors from '../utils/colors';
 import CommentsList from '../containers/CommentsList';
 
@@ -47,9 +48,9 @@ class TabBar extends React.Component {
         </Tab>
 
         <Tab
-          selected={this.state.selectedTab === 'friends'}
-          onPress={() => this.setState({ selectedTab: 'friends' })}
-          title={this.state.selectedTab === 'friends' ? 'Friends' : null}
+          selected={this.state.selectedTab === 'seen'}
+          onPress={() => this.setState({ selectedTab: 'seen' })}
+          title={this.state.selectedTab === 'seen' ? 'Users seen' : null}
           titleStyle={styles.tabTitle}
           selectedTitleStyle={styles.selectedTabTitle}
           renderIcon={() => <Icon name="people" size={26} />}
@@ -58,7 +59,7 @@ class TabBar extends React.Component {
           }
         >
           <View style={styles.tabChildrenContainer}>
-            <Text>Empty section</Text>
+            <UsersSeen />
           </View>
         </Tab>
       </Tabs>

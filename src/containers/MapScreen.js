@@ -1,25 +1,48 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MapScreen from '../components/MapScreen';
-import { toggleAddCommentModalVisibility } from '../actions/comments';
+import {
+  toggleAddCommentModalVisibility,
+  fetchNearComments
+} from '../actions/comments';
 import { Actions } from 'react-native-router-flux';
 
-const MapScreenHOC = (props) => (
-  <MapScreen
-    {...props}
-    onCommentPress={
-      ({ id: commentId }) =>
-        Actions.commentPage({ title: 'A comment', commentId })
-    }
-  />
-);
+class MapScreenHOC extends React.Component {
+
+  render() {
+    return (
+      <MapScreen
+        comments={this.props.comments}
+        onAddCommentPress={() => this.props.toggleAddCommentModalVisibility()}
+        onCommentPress={
+          comment => Actions.commentPage({ title: 'A comment', comment })
+        }
+      />
+    );
+  }
+
+  static propTypes = {
+    comments: React.PropTypes.arrayOf(
+      React.PropTypes.shape
+    ),
+    toggleAddCommentModalVisibility: React.PropTypes.func,
+    fetchNearComments: React.PropTypes.func
+  }
+
+  componentWillMount() {
+    this.props.fetchNearComments();
+  }
+
+}
 
 export default connect(
-  ({ comments }) => {
-    const commentsArray = Object.keys(comments).map(key => comments[key]);
-    return { comments: commentsArray };
+  ({ comments: commentsInState }) => {
+    const { items = [], hashMap = {} } = commentsInState;
+    const comments = items.map(commentId => hashMap[commentId]);
+    return { comments };
   },
   {
-    toggleAddCommentModalVisibility
+    toggleAddCommentModalVisibility,
+    fetchNearComments
   },
 )(MapScreenHOC);

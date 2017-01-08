@@ -5,11 +5,12 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "api-mock": "json-server --watch api-db.js --routes api-routes.json",
     "test:watch": "jest --watch",
     "coverage": "jest --coverage"
   },
   "dependencies": {
-    "faker": "^3.1.0",
+    "faker": "3.1.0",
     "lodash": "^4.16.4",
     "node-uuid": "^1.4.7",
     "react": "15.3.2",

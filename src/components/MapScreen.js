@@ -30,7 +30,7 @@ class MapScreen extends React.Component {
               key={key}
               pinColor={colors.primary1}
               coordinate={comment.coordinate}
-              title={comment.author.username}
+              title={_.get(comment, 'user.firstName', null)}
               description={_.truncate(comment.description)}
               onCalloutPress={() => this.props.onCommentPress(comment)}
             >
@@ -45,7 +45,7 @@ class MapScreen extends React.Component {
           <ActionButton.Item
             buttonColor="#9b59b6"
             title="Add a comment"
-            onPress={() => this.props.toggleAddCommentModalVisibility()}
+            onPress={this.props.onAddCommentPress}
           >
             <Icon name="create" color="white" />
           </ActionButton.Item>
@@ -66,12 +66,12 @@ class MapScreen extends React.Component {
       React.PropTypes.shape({
         coordinate: React.PropTypes.object,
         title: React.PropTypes.string,
-        author: React.PropTypes.shape({
-          username: React.PropTypes.string
+        user: React.PropTypes.shape({
+          firstName: React.PropTypes.string
         })
       })
     ),
-    toggleAddCommentModalVisibility: React.PropTypes.func,
+    onAddCommentPress: React.PropTypes.func,
     onCommentPress: React.PropTypes.func
   }
 

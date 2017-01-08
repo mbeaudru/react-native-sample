@@ -4,11 +4,13 @@ import { Actions } from 'react-native-router-flux';
 import { View, Text, TouchableHighlight, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import CommentItem from '../components/CommentItem';
+import { fetchCommentById } from '../actions/comments';
 import _ from 'lodash';
 
 class CommentPageHOC extends React.Component {
 
   render() {
+    const replies = _.get(this.props.comment, 'replies', []);
     return (
       <View style={styles.container}>
         <TouchableHighlight onPress={() => Actions.pop()}>
@@ -21,7 +23,7 @@ class CommentPageHOC extends React.Component {
         <ScrollView>
           <CommentItem comment={this.props.comment} />
 
-          {this.props.comment.replies.map((comment, key) =>
+          {replies.map((comment, key) =>
             <CommentItem key={key} comment={comment} small />
           )}
 
@@ -30,15 +32,27 @@ class CommentPageHOC extends React.Component {
     );
   }
 
-}
+  static propTypes = {
+    comment: React.PropTypes.shape({
+      id: React.PropTypes.oneOfType([
+        React.PropTypes.number,
+        React.PropTypes.string
+      ]),
+      description: React.PropTypes.string,
+      replies: React.PropTypes.array
+    }),
+    fetchCommentById: React.PropTypes.func
+  }
 
-CommentPageHOC.propTypes = {
-  comment: React.PropTypes.shape({
-    id: React.PropTypes.string,
-    description: React.PropTypes.string,
-    replies: React.PropTypes.array
-  })
-};
+  static defaultProps = {
+    comment: { replies: [] }
+  }
+
+  componentWillMount() {
+    this.props.fetchCommentById(this.props.comment.id);
+  }
+
+}
 
 const styles = {
   container: {
@@ -59,9 +73,8 @@ const styles = {
 
 export default connect(
   (state, ownProps) => {
-    const comment = _.get(state, ['comments', ownProps.commentId], {});
-    //console.log(comment); // eslint-disable-line
+    const comment = ownProps.comment;
     return { comment };
   },
-  () => ({}),
+  { fetchCommentById },
 )(CommentPageHOC);

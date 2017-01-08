@@ -1,0 +1,4 @@
+{
+  "/comments/:id/like": "/comments/:id?_expand=user",
+  "/comments/:id": "/comments/:id?_embed=replies&_expand=user"
+}

@@ -8,17 +8,17 @@ class CommentItem extends React.Component {
   render() {
     if (!this.props.comment) return <View />;
     const styles = this.getStyles(this.props.small);
+    const user = _.get(this.props.comment, 'user', {});
     return (
       <View>
         <View style={styles.main.container}>
-          <CommentItem />
           <Image
             style={styles.main.avatar}
-            source={{ uri: `${this.props.comment.author.avatar}` }}
+            source={{ uri: `${user.avatar}` }}
           />
           <View style={styles.main.content}>
             <Text style={styles.main.username}>
-              {this.props.comment.author.username}
+              {user.firstName}
             </Text>
             <Text style={styles.main.description}>
               {this.props.comment.description}
@@ -26,10 +26,6 @@ class CommentItem extends React.Component {
           </View>
         </View>
         <View style={styles.main.actions}>
-          <ActionButton
-            icon="share" text="Share"
-            size={this.getIconSize()} hideLabel={this.props.small}
-          />
           <ActionButton
             icon="star" text="Like"
             size={this.getIconSize()} hideLabel={this.props.small}
@@ -42,6 +38,30 @@ class CommentItem extends React.Component {
         </View>
       </View>
     );
+  }
+
+  static propTypes = {
+    comment: React.PropTypes.shape({
+      id: React.PropTypes.oneOfType([
+        React.PropTypes.number,
+        React.PropTypes.string
+      ]),
+      user: React.PropTypes.shape({
+        id: React.PropTypes.oneOfType([
+          React.PropTypes.number,
+          React.PropTypes.string
+        ]),
+        firstName: React.PropTypes.string,
+        avatar: React.PropTypes.string
+      }),
+      description: React.PropTypes.string,
+      coordinate: React.PropTypes.object
+    }).isRequired,
+    small: React.PropTypes.bool
+  }
+
+  static defaultProps = {
+    comment: {}
   }
 
   constructor(props) {
@@ -124,23 +144,5 @@ class CommentItem extends React.Component {
   }
 
 }
-
-CommentItem.propTypes = {
-  comment: React.PropTypes.shape({
-    id: React.PropTypes.string,
-    author: React.PropTypes.shape({
-      id: React.PropTypes.string,
-      username: React.PropTypes.string,
-      avatar: React.PropTypes.string
-    }),
-    description: React.PropTypes.string,
-    coordinate: React.PropTypes.object
-  }).isRequired,
-  small: React.PropTypes.bool
-};
-
-CommentItem.defaultProps = {
-  comment: {}
-};
 
 export default CommentItem;

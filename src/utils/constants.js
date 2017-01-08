@@ -1,3 +1,7 @@
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const TOGGLE_ADD_COMMENT_MODAL_VISIBILITY = 'TOGGLE_ADD_COMMENT_MODAL_VISIBILITY'; // eslint-disable-line
+
+export const FETCH_USER = 'FETCH_USER';
+export const FETCH_COMMENTS = 'FETCH_COMMENTS';
+export const FETCH_COMMENT = 'FETCH_COMMENT';

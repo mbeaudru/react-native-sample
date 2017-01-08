@@ -12,13 +12,14 @@ class CommentsList extends React.Component {
           {
             this.props.comments
               .map((comment, key) => {
-                const { description, author } = comment;
+                const { description, user } = comment;
+                if (!user) return null;
                 return (
                   <ListItem
                     key={key}
                     roundAvatar
-                    avatar={author.avatar}
-                    title={author.username}
+                    avatar={user.avatar}
+                    title={user.firstName}
                     subtitle={_.truncate(description, { length: 45 })}
                     onPress={() => this.props.onCommentClick(comment)}
                   />

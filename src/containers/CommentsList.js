@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import CommentsList from '../components/CommentsList';
 import { Actions } from 'react-native-router-flux';
+import { fetchNearComments } from '../actions/comments';
 
 import React from 'react';
 
@@ -10,13 +11,17 @@ class CommentsListHOC extends React.Component {
     return (
       <CommentsList
         comments={this.props.comments}
-        onCommentClick={({ id }) => { this.goToCommentPage(id); }}
+        onCommentClick={comment => { this.goToCommentPage(comment); }}
       />
     );
   }
 
-  goToCommentPage(commentId) {
-    Actions.commentPage({ title: 'A comment', commentId });
+  componentWillMount() {
+    this.props.fetchNearComments();
+  }
+
+  goToCommentPage(comment) {
+    Actions.commentPage({ title: 'A comment', comment });
   }
 
 }
@@ -24,21 +29,26 @@ class CommentsListHOC extends React.Component {
 CommentsListHOC.propTypes = {
   comments: React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      author: React.PropTypes.shape({
-        username: React.PropTypes.string,
+      user: React.PropTypes.shape({
+        firstName: React.PropTypes.string,
         avatar: React.PropTypes.string
       }),
       description: React.PropTypes.string,
       coordinate: React.PropTypes.object,
-      id: React.PropTypes.string
+      id: React.PropTypes.oneOfType([
+        React.PropTypes.number,
+        React.PropTypes.string
+      ])
     })
-  )
+  ),
+  fetchNearComments: React.PropTypes.func
 };
 
 export default connect(
   ({ comments: commentsState }) => {
-    const comments = Object.keys(commentsState).map(key => commentsState[key]);
+    const { items = [], hashMap = {} } = commentsState;
+    const comments = items.map(commentId => hashMap[commentId]);
     return { comments };
   },
-  () => ({})
+  { fetchNearComments }
 )(CommentsListHOC);
