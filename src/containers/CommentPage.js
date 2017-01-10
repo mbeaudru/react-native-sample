@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { View, Text, TouchableHighlight, ScrollView } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { View, ScrollView } from 'react-native';
 import CommentItem from '../components/CommentItem';
+import TopBar from '../components/TopBar';
 import { fetchCommentById } from '../actions/comments';
 import _ from 'lodash';
 
@@ -12,18 +12,21 @@ class CommentPage extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={() => Actions.pop()}>
-          <View style={styles.topBar}>
-            <Icon name="chevron-left" />
-            <Text style={styles.topBarText}>Comments</Text>
-          </View>
-        </TouchableHighlight>
+        <TopBar onPress={() => Actions.pop()} textValue="Comments" />
 
         <ScrollView>
-          <CommentItem comment={this.props.comment} />
+          <CommentItem
+            comment={this.props.comment}
+            onAvatarPress={userId => Actions.userProfile({ userId })}
+          />
 
           {this.props.replies.map((comment, key) =>
-            <CommentItem key={key} comment={comment} small />
+            <CommentItem
+              key={key}
+              comment={comment}
+              onAvatarPress={userId => Actions.userProfile({ userId })}
+              small
+            />
           )}
 
         </ScrollView>
@@ -59,17 +62,6 @@ class CommentPage extends React.Component {
 const styles = {
   container: {
     flex: 1
-  },
-  topBar: {
-    alignItems: 'center',
-    backgroundColor: '#f3f3f3',
-    height: 50,
-    flexDirection: 'row',
-    paddingLeft: 10
-  },
-  topBarText: {
-    fontSize: 17,
-    marginLeft: 20
   }
 };
 

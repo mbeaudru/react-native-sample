@@ -78,10 +78,6 @@ const chatrooms = [...Array(chatroomsNb)].map(() => {
 });
 
 // User management
-const currentUserSeen = [...Array(Math.floor(Math.random() * usersNb))].map(() =>
-  usersBase[Math.floor(Math.random() * usersNb)]
-);
-
 const userToken = { token: 'mKfeazoJjfezafoJfhezifuhJ' };
 
 const checkUserToken = { status: 'OK' };
@@ -91,7 +87,10 @@ const getCurrentUser = {
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   avatar: faker.image.avatar(),
-  description: faker.lorem.words()
+  description: faker.lorem.words(),
+  seen: [...Array(Math.floor(Math.random() * usersNb))].map(() =>
+    usersBase[Math.floor(Math.random() * usersNb)]
+  )
 };
 
 const currentUserPicture = {
@@ -103,7 +102,6 @@ const db = {
   comments,
   replies,
   chatrooms,
-  currentUserSeen,
   userToken,
   checkUserToken,
   getCurrentUser,

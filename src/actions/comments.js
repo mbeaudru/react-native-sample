@@ -1,10 +1,10 @@
 import * as types from '../utils/constants';
 import * as api from '../utils/api';
+import _ from 'lodash';
 
 export function fetchNearComments() {
-  return dispatch => {
-    // TODO: Remove expand parameter in prod
-    fetch(api.NEAR_COMMENTS())
+  return (dispatch, getState) => {
+    fetch(api.NEAR_COMMENTS(), api.headerToken(getState()))
       .then(res => res.json())
       .then(comments => dispatch({
         type: types.FETCH_COMMENTS,
@@ -15,8 +15,8 @@ export function fetchNearComments() {
 }
 
 export function fetchCommentById(commentId) {
-  return dispatch => {
-    fetch(api.COMMENTS_$ID(commentId))
+  return (dispatch, getState) => {
+    fetch(api.COMMENTS_$ID(commentId), api.headerToken(getState()))
       .then(res => res.json())
       .then(comment => dispatch({
         type: types.FETCH_COMMENT,
@@ -28,13 +28,15 @@ export function fetchCommentById(commentId) {
 
 export function addComment(comment = {}) {
   return (dispatch, getState) => {
-    fetch(api.NEAR_COMMENTS(), {
+    const queryParams = _.merge({}, api.headerToken(getState()), {
       method: "POST",
       body: JSON.stringify(comment),
       headers: {
         "Content-Type": "application/json"
       }
-    })
+    });
+
+    fetch(api.NEAR_COMMENTS(), queryParams)
     .then(res => res.json())
     .then(() => {
       fetch(api.NEAR_COMMENTS())

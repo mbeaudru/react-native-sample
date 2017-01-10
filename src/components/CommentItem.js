@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, TouchableHighlight } from 'react-native';
 import ActionButton from './ActionButton';
 import _ from 'lodash';
 
@@ -12,10 +12,15 @@ class CommentItem extends React.Component {
     return (
       <View>
         <View style={styles.main.container}>
-          <Image
-            style={styles.main.avatar}
-            source={{ uri: `${user.avatar}` }}
-          />
+          <TouchableHighlight
+            underlayColor="#f7f7f7"
+            onPress={() => this.props.onAvatarPress(user.id)}
+          >
+            <Image
+              style={styles.main.avatar}
+              source={{ uri: `${user.avatar}` }}
+            />
+          </TouchableHighlight>
           <View style={styles.main.content}>
             <Text style={styles.main.username}>
               {user.firstName}
@@ -57,11 +62,13 @@ class CommentItem extends React.Component {
       description: React.PropTypes.string,
       coordinate: React.PropTypes.object
     }).isRequired,
-    small: React.PropTypes.bool
+    small: React.PropTypes.bool,
+    onAvatarPress: React.PropTypes.func
   }
 
   static defaultProps = {
-    comment: {}
+    comment: {},
+    onAvatarPress: () => ({})
   }
 
   constructor(props) {

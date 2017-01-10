@@ -1,14 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView } from 'react-native';
+import { ScrollView, ActivityIndicator } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
-import faker from 'faker';
+import { fetchCurrentUser } from '../actions/users';
 
 class UsersSeen extends React.Component {
 
   render() {
+    if (!this.props.usersSeen) {
+      return (
+        <ActivityIndicator size={100} style={styles.spinner} />
+      );
+    }
     return (
       <ScrollView style={styles.container}>
         <List>
@@ -37,7 +42,12 @@ class UsersSeen extends React.Component {
         lastName: React.PropTypes.string,
         avatar: React.PropTypes.string
       })
-    )
+    ),
+    fetchCurrentUser: React.PropTypes.func
+  }
+
+  componentWillMount() {
+    this.props.fetchCurrentUser();
   }
 
   onUserPress(userId) {
@@ -49,24 +59,19 @@ class UsersSeen extends React.Component {
 const styles = {
   container: {
     marginTop: -22
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center'
   }
 };
 
 export default connect(
   ({ users }) => {
-    const currentUser = '';
-    const fakeUsersSeen = [...Array(10)].map(() => (
-      {
-        id: faker.random.uuid(),
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        avatar: faker.image.avatar(),
-        description: faker.lorem.words()
-      }
-    ));
-    const usersSeen = _.get(users, [currentUser, 'seen'], fakeUsersSeen);
+    const currentUserId = _.get(users, 'currentUser.id', null);
+    const usersSeen = _.get(users, ['hashMap', currentUserId, 'seen'], null);
 
     return { usersSeen };
   },
-  () => ({})
+  { fetchCurrentUser }
 )(UsersSeen);

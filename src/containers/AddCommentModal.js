@@ -5,6 +5,7 @@ import { v1 } from 'node-uuid';
 import {
   addComment, toggleAddCommentModalVisibility
 } from '../actions/comments';
+import _ from 'lodash';
 
 class AddCommentModalHOC extends React.Component {
 
@@ -24,7 +25,11 @@ class AddCommentModalHOC extends React.Component {
     coordinate: React.PropTypes.shape({
       latitude: React.PropTypes.number,
       longitude: React.PropTypes.number
-    })
+    }),
+    userId: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ])
   }
 
   constructor(props) {
@@ -34,8 +39,8 @@ class AddCommentModalHOC extends React.Component {
   }
 
   addComment(commentForm) {
-    // TODO: Get real userId
-    const userId = "0";
+    if (!this.props.userId) return;
+    const userId = this.props.userId;
     const comment = Object.assign(
       {},
       {
@@ -53,10 +58,12 @@ class AddCommentModalHOC extends React.Component {
 }
 
 export default connect(
-  ({ comments, layout }, ownProps) => {
+  ({ comments, layout, users }, ownProps) => {
     const { coordinate } = ownProps;
     const { addCommentModalVisible: visible } = layout;
-    return { visible, coordinate };
+    const userId = _.get(users, 'currentUser.id', null);
+    console.log(users, userId);
+    return { visible, coordinate, userId };
   },
   { addComment, toggleAddCommentModalVisibility },
 )(AddCommentModalHOC);

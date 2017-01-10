@@ -1,27 +1,42 @@
 import _ from 'lodash';
-import faker from 'faker';
 
 const initialState = {
-  currentUser: {
-    firstName: faker.name.firstName(),
-    avatar: faker.image.avatar()
-  },
-  users: {},
-  seen: []
+  items: [],
+  hashMap: {},
+  currentUser: {}
 };
 
 export default function users(state = initialState, action) {
   switch(action.type) {
-    case 'FETCH_USERS_SEEN': {
-      const seen = [];
-      const users = action.users.map(user => {
-        seen.push(user.id);
-        return { [`${user.id}`]: user };
-      });
-
+    case 'FETCH_USERS': {
+      const fetchedUsers = [];
+      const hashMap = action.users.reduce(
+        (prev, user) => {
+          fetchedUsers.push(user.id);
+          return Object.assign({}, prev, {
+            [`${user.id}`]: user
+          });
+        }
+      );
+      const items = _.uniq([...state.items, ...fetchedUsers]);
       return _.merge({}, state, {
-        seen,
-        users
+        items,
+        hashMap
+      });
+    }
+    case 'FETCH_USER': {
+      const items = _.uniq([...state.items, action.user.id]);
+      const hashMap = _.merge({}, state.hashMap, {
+        [`${action.user.id}`]: action.user
+      });
+      return _.merge({}, state, {
+        items,
+        hashMap
+      });
+    }
+    case 'SET_CURRENT_USER': {
+      return _.merge({}, state, {
+        currentUser: action.user
       });
     }
     default:
