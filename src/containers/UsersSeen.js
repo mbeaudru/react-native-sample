@@ -17,7 +17,7 @@ class UsersSeen extends React.Component {
     const currentUser = this.props.currentUser;
     return (
       <View style={styles.container}>
-        <Text style={styles.listLabel}>You</Text>
+        {/* <Text style={styles.listLabel}>You</Text> */}
         <ListItem
           roundAvatar
           avatar={this.props.currentUser.avatar}
@@ -124,8 +124,9 @@ const styles = {
     zIndex: 2
   },
   searchBar: {
-    zIndex: 2,
-    backgroundColor: '#fbfbfb'
+    zIndex: 3,
+    backgroundColor: '#fbfbfb',
+    marginTop: -2
   },
   inputStyle: {
     backgroundColor: '#f0f0f0'
