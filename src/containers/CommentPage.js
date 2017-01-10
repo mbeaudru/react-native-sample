@@ -46,7 +46,8 @@ class CommentPage extends React.Component {
   }
 
   static defaultProps = {
-    comment: { replies: [] }
+    comment: {},
+    replies: []
   }
 
   componentWillMount() {

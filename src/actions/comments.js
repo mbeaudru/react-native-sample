@@ -1,10 +1,10 @@
 import * as types from '../utils/constants';
-import { SERVER_URL } from '../utils/server-configuration';
+import * as api from '../utils/api';
 
 export function fetchNearComments() {
   return dispatch => {
     // TODO: Remove expand parameter in prod
-    fetch(SERVER_URL+'/comments?_expand=user')
+    fetch(api.NEAR_COMMENTS())
       .then(res => res.json())
       .then(comments => dispatch({
         type: types.FETCH_COMMENTS,
@@ -16,7 +16,7 @@ export function fetchNearComments() {
 
 export function fetchCommentById(commentId) {
   return dispatch => {
-    fetch(`${SERVER_URL}/comments/${commentId}`)
+    fetch(api.COMMENTS_$ID(commentId))
       .then(res => res.json())
       .then(comment => dispatch({
         type: types.FETCH_COMMENT,
@@ -28,7 +28,7 @@ export function fetchCommentById(commentId) {
 
 export function addComment(comment = {}) {
   return (dispatch, getState) => {
-    fetch(`${SERVER_URL}/comments`, {
+    fetch(api.NEAR_COMMENTS(), {
       method: "POST",
       body: JSON.stringify(comment),
       headers: {
@@ -37,8 +37,7 @@ export function addComment(comment = {}) {
     })
     .then(res => res.json())
     .then(() => {
-      // TODO: Remove expand parameter in prod
-      fetch(SERVER_URL+'/comments?_expand=user')
+      fetch(api.NEAR_COMMENTS())
         .then(res => res.json())
         .then(comments => dispatch({
           type: types.FETCH_COMMENTS,

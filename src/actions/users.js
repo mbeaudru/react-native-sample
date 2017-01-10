@@ -1,5 +1,5 @@
 import * as types from '../utils/constants';
-import { SERVER_URL } from '../utils/server-configuration';
+import * as api from '../utils/api';
 
 export function fetchUserById(comment = {}) {
   return (dispatch, getState) => {
@@ -16,7 +16,7 @@ export function fetchUserById(comment = {}) {
 
 export function fetchUsersSeen(currentUserId = 0) {
   return dispatch => {
-    fetch(`${SERVER_URL}/users/${currentUserId}/seen`)
+    fetch(api.CURRENT_USER_SEEN)
       .then(res => res.json())
       .then(users => dispatch({
         type: types.FETCH_USERS_SEEN,

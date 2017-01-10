@@ -75,13 +75,39 @@ const chatrooms = [...Array(chatroomsNb)].map(() => {
       longitudeDelta: 0.005
     }
   }
-})
+});
+
+// User management
+const currentUserSeen = [...Array(Math.floor(Math.random() * usersNb))].map(() =>
+  usersBase[Math.floor(Math.random() * usersNb)]
+);
+
+const userToken = { token: 'mKfeazoJjfezafoJfhezifuhJ' };
+
+const checkUserToken = { status: 'OK' };
+
+const getCurrentUser = {
+  id: 'currentUserId',
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  avatar: faker.image.avatar(),
+  description: faker.lorem.words()
+};
+
+const currentUserPicture = {
+  avatar: faker.image.avatar()
+};
 
 const db = {
   users,
   comments,
   replies,
-  chatrooms
+  chatrooms,
+  currentUserSeen,
+  userToken,
+  checkUserToken,
+  getCurrentUser,
+  currentUserPicture
 };
 
 module.exports = function() {

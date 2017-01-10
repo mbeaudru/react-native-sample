@@ -1,4 +1,10 @@
 {
   "/comments/:id/like": "/comments/:id?_expand=user",
-  "/comments/:id": "/comments/:id?_embed=replies&_expand=user"
+  "/comments/:id": "/comments/:id?_embed=replies&_expand=user",
+  "/uaa/users/current/seen": "/currentUserSeen",
+  "/uaa/oauth/token": "/userToken",
+  "/uaa/oauth/check_token": "/checkUserToken",
+  "/uaa/users/current/picture": "/currentUserPicture",
+  "/uaa/users/current": "/getCurrentUser",
+  "/register": "/users"
 }
