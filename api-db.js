@@ -93,6 +93,9 @@ const getCurrentUser = {
   )
 };
 
+// TODO: Remove when create user form will be OK
+users.push(getCurrentUser);
+
 const currentUserPicture = {
   avatar: faker.image.avatar()
 };

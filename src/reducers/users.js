@@ -34,7 +34,9 @@ export default function users(state = initialState, action) {
     }
     case 'SET_CURRENT_USER': {
       return _.merge({}, state, {
-        currentUser: action.user
+        currentUser: {
+          id: action.user.id
+        }
       });
     }
     default:
