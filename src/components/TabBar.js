@@ -50,7 +50,7 @@ class TabBar extends React.Component {
         <Tab
           selected={this.state.selectedTab === 'seen'}
           onPress={() => this.setState({ selectedTab: 'seen' })}
-          title={this.state.selectedTab === 'seen' ? 'Users seen' : null}
+          title={this.state.selectedTab === 'seen' ? 'Users' : null}
           titleStyle={styles.tabTitle}
           selectedTitleStyle={styles.selectedTabTitle}
           renderIcon={() => <Icon name="people" size={26} />}
