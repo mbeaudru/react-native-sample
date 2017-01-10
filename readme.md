@@ -190,5 +190,4 @@ In this project, we have decided to use **Enzyme** to test the components method
 
 ## Known issues - Fix list
 
-- Adding an user comment doesn't work properly as author is not logged in.
-- Redux stores comments + users are wrong because of FETCH_USERS && FETCH_COMMENTS
+- Adding an user comment doesn't work properly as author is not logged in

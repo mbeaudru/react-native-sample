@@ -62,7 +62,6 @@ export default connect(
     const { coordinate } = ownProps;
     const { addCommentModalVisible: visible } = layout;
     const userId = _.get(users, 'currentUser.id', null);
-    console.log(users, userId);
     return { visible, coordinate, userId };
   },
   { addComment, toggleAddCommentModalVisibility },

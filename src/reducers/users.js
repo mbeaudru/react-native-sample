@@ -10,14 +10,12 @@ export default function users(state = initialState, action) {
   switch(action.type) {
     case 'FETCH_USERS': {
       const fetchedUsers = [];
-      const hashMap = action.users.reduce(
-        (prev, user) => {
+      const hashMap = action.users
+        .map(user => {
           fetchedUsers.push(user.id);
-          return Object.assign({}, prev, {
-            [`${user.id}`]: user
-          });
-        }
-      );
+          return { [`${user.id}`]: user };
+        })
+        .reduce((prev, next) => Object.assign({}, prev, next), {});
       const items = _.uniq([...state.items, ...fetchedUsers]);
       return _.merge({}, state, {
         items,
