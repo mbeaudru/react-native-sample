@@ -20,8 +20,8 @@ class CommentsListHOC extends React.Component {
     this.props.fetchNearComments();
   }
 
-  goToCommentPage(comment) {
-    Actions.commentPage({ title: 'A comment', comment });
+  goToCommentPage({ id: commentId }) {
+    Actions.commentPage({ title: 'A comment', commentId });
   }
 
 }

@@ -7,18 +7,26 @@ const fs = require('fs');
 
 const usersNb = 50;
 const commentsNb = 30;
-const repliesNb = 1000;
+const maxRepliesNb = 20;
 const chatroomsNb = 5;
 
-const users = [...Array(usersNb)].map((e, id) => (
-  {
-    id,
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    avatar: faker.image.avatar(),
-    description: faker.lorem.words()
-  }
-));
+const generateUser = (id) => ({
+  id,
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  avatar: faker.image.avatar(),
+  description: faker.lorem.words()
+})
+
+const usersBase = [...Array(usersNb)].map((e, id) => generateUser(id));
+
+const users = usersBase.map((user, id) =>
+  Object.assign({}, user, {
+    seen: [...Array(Math.floor(Math.random() * usersNb))].map(() =>
+      usersBase[Math.floor(Math.random() * usersNb)]
+    )
+  })
+);
 
 const comments = [...Array(commentsNb)].map((e, id) => {
   const author = users[Math.floor(Math.random() * usersNb)];
@@ -37,17 +45,20 @@ const comments = [...Array(commentsNb)].map((e, id) => {
   );
 });
 
-const replies = [...Array(repliesNb)].map(() => {
-  const parentComment = comments[Math.floor(Math.random() * commentsNb)];
-  const replier = users[Math.floor(Math.random() * usersNb)];
-  return ({
-    id: faker.random.uuid(),
-    user: replier,
-    description: faker.lorem.sentences(),
+const replies = comments
+  .map(comment =>
+    [...Array(Math.floor(Math.random() * maxRepliesNb)) + 3].map(() => {
+      const replier = users[Math.floor(Math.random() * usersNb)];
+      return ({
+        id: faker.random.uuid(),
+        user: replier,
+        description: faker.lorem.sentences(),
 
-    commentId: parentComment.id
-  });
-});
+        commentId: comment.id
+      });
+    })
+  )
+  .reduce((prev, next) => [...prev, ...next], []);
 
 const chatrooms = [...Array(chatroomsNb)].map(() => {
   const chatUsers = users.filter(() => faker.random.boolean());

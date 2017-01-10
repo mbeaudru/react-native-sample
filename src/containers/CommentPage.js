@@ -7,10 +7,9 @@ import CommentItem from '../components/CommentItem';
 import { fetchCommentById } from '../actions/comments';
 import _ from 'lodash';
 
-class CommentPageHOC extends React.Component {
+class CommentPage extends React.Component {
 
   render() {
-    const replies = _.get(this.props.comment, 'replies', []);
     return (
       <View style={styles.container}>
         <TouchableHighlight onPress={() => Actions.pop()}>
@@ -23,7 +22,7 @@ class CommentPageHOC extends React.Component {
         <ScrollView>
           <CommentItem comment={this.props.comment} />
 
-          {replies.map((comment, key) =>
+          {this.props.replies.map((comment, key) =>
             <CommentItem key={key} comment={comment} small />
           )}
 
@@ -38,10 +37,12 @@ class CommentPageHOC extends React.Component {
         React.PropTypes.number,
         React.PropTypes.string
       ]),
-      description: React.PropTypes.string,
-      replies: React.PropTypes.array
+      description: React.PropTypes.string
     }),
-    fetchCommentById: React.PropTypes.func
+    fetchCommentById: React.PropTypes.func,
+    replies: React.PropTypes.arrayOf(
+      React.PropTypes.object
+    )
   }
 
   static defaultProps = {
@@ -72,9 +73,10 @@ const styles = {
 };
 
 export default connect(
-  (state, ownProps) => {
-    const comment = ownProps.comment;
-    return { comment };
+  ({ comments }, ownProps) => {
+    const comment = _.get(comments, ['hashMap', ownProps.commentId], {});
+    const replies = _.get(comment, 'replies', []);
+    return { comment, replies };
   },
   { fetchCommentById },
-)(CommentPageHOC);
+)(CommentPage);

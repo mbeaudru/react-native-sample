@@ -15,7 +15,8 @@ class MapScreenHOC extends React.Component {
         comments={this.props.comments}
         onAddCommentPress={() => this.props.toggleAddCommentModalVisibility()}
         onCommentPress={
-          comment => Actions.commentPage({ title: 'A comment', comment })
+          ({ id: commentId }) =>
+            Actions.commentPage({ title: 'A comment', commentId })
         }
       />
     );
