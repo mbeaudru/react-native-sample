@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, Text, TouchableHighlight } from 'react-native';
 import ActionButton from './ActionButton';
+import colors from '../utils/colors';
 import _ from 'lodash';
 
 class CommentItem extends React.Component {
@@ -13,7 +14,7 @@ class CommentItem extends React.Component {
       <View>
         <View style={styles.main.container}>
           <TouchableHighlight
-            underlayColor="#f7f7f7"
+            underlayColor={styles.main.container.backgroundColor}
             onPress={() => this.props.onAvatarPress(user.id)}
           >
             <Image
@@ -32,11 +33,13 @@ class CommentItem extends React.Component {
         </View>
         <View style={styles.main.actions}>
           <ActionButton
+            textColor={styles.main.actionsColor}
             icon="star" text="Like"
             size={this.getIconSize()} hideLabel={this.props.small}
           />
           {!this.props.small &&
           <ActionButton
+            textColor={styles.main.actionsColor}
             icon="reply" text="Reply"
             size={this.getIconSize()} hideLabel={this.props.small}
           />}
@@ -87,31 +90,36 @@ class CommentItem extends React.Component {
           flexDirection: 'row',
           padding: 15,
           paddingBottom: 20,
-          backgroundColor: '#f7f7f7'
+          backgroundColor: colors.primary2
         },
         actions: {
           flexDirection: 'row',
           justifyContent: 'space-around',
-          backgroundColor: '#fbfbfb',
+          backgroundColor: colors.primary3,
           paddingBottom: 10,
-          paddingTop: 10
+          paddingTop: 10,
         },
+        actionsColor: 'white',
         content: {
           flex: 1
         },
         avatar: {
           width: 55,
           height: 55,
-          borderRadius: 10,
+          borderRadius: 30,
           marginRight: 15,
-          marginTop: 7
+          marginTop: 7,
+          borderWidth: 2,
+          borderColor: 'white'
         },
         username: {
           fontSize: 25,
-          fontWeight: 'bold'
+          fontWeight: 'bold',
+          color: 'white'
         },
         description: {
-          fontSize: 16
+          fontSize: 16,
+          color: 'white'
         }
       }
     };
@@ -120,23 +128,30 @@ class CommentItem extends React.Component {
 
     const smallStyles = {
       main: {
+        container: {
+          backgroundColor: colors.bck1
+        },
         description: {
-          fontSize: 13
+          fontSize: 13,
+          color: '#777777'
         },
         username: {
-          fontSize: 18
+          fontSize: 18,
+          color: '#666666'
         },
         actions: {
           paddingBottom: 5,
           paddingTop: 5,
-          backgroundColor: '#f9f9f9'
+          backgroundColor: colors.bck2
         },
+        actionsColor: '#555555',
         avatar: {
           width: 45,
           height: 45,
-          borderRadius: 10,
+          borderRadius: 30,
           marginRight: 15,
-          marginTop: 5
+          marginTop: 5,
+          borderWidth: 0
         }
       }
     };

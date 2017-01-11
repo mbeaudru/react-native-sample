@@ -1,10 +1,13 @@
 import React from 'react';
 import { View, Text, ScrollView, Image } from 'react-native';
+import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchUserById } from '../actions/users';
 import { Actions } from 'react-native-router-flux';
+import colors from '../utils/colors';
 import CommentsList from '../components/CommentsList';
 import TopBar from '../components/TopBar';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import _ from 'lodash';
 
 class UserProfile extends React.Component {
@@ -14,25 +17,48 @@ class UserProfile extends React.Component {
       <View>
         <TopBar textValue="User Profile" onPress={() => Actions.pop()} />
         <ScrollView>
-          <View style={styles.main.container}>
+          <View style={styles.container}>
             <Image
-              style={styles.main.avatar}
+              style={styles.avatar}
               source={{ uri: `${this.props.user.avatar}` }}
             />
-            <View style={styles.main.content}>
-              <Text style={styles.main.username}>
+            <View style={styles.content}>
+              <Text style={styles.username}>
                 {this.props.user.firstName}
               </Text>
-              <Text style={styles.main.description}>
+              <Text style={styles.description}>
                 {this.props.user.description}
               </Text>
             </View>
           </View>
+          <ScrollableTabView
+            style={styles.tabView}
+            tabBarUnderlineStyle={styles.tabBarUnderlineStyle}
+            tabBarActiveTextColor={colors.primary2}
+            tabBarInactiveTextColor={colors.notSelectedText}
+          >
+            <CommentsList
+              tabLabel="Comments"
+              comments={this.props.comments}
+              onCommentClick={comment => { this.goToCommentPage(comment); }}
+            />
+            <List tabLabel="Users seen" containerStyle={styles.userList}>
+              {
+                this.props.usersSeen.map(
+                  ({ id, firstName, lastName, avatar, description }, key) =>
+                    <ListItem
+                      key={key}
+                      roundAvatar
+                      avatar={avatar}
+                      title={`${firstName} ${lastName}`}
+                      subtitle={description}
+                      onPress={() => this.onUserPress(id)}
+                    />
+                  )
+              }
+            </List>
+          </ScrollableTabView>
         </ScrollView>
-        <CommentsList
-          comments={this.props.comments}
-          onCommentClick={comment => { this.goToCommentPage(comment); }}
-        />
       </View>
     );
   }
@@ -47,6 +73,17 @@ class UserProfile extends React.Component {
       avatar: React.PropTypes.string,
       description: React.PropTypes.string
     }),
+    usersSeen: React.PropTypes.arrayOf(
+      React.PropTypes.shape({
+        id: React.PropTypes.oneOfType([
+          React.PropTypes.string,
+          React.PropTypes.number
+        ]),
+        firstName: React.PropTypes.string,
+        avatar: React.PropTypes.string,
+        description: React.PropTypes.string
+      })
+    ),
     fetchUserById: React.PropTypes.func,
     comments: React.PropTypes.arrayOf(
       React.PropTypes.object
@@ -70,43 +107,59 @@ class UserProfile extends React.Component {
     Actions.commentPage({ title: 'A comment', commentId });
   }
 
+  onUserPress(userId) {
+    Actions.userProfile({ userId });
+  }
+
 }
 
 const styles = {
   container: {
+    flexDirection: 'column',
+    padding: 15,
+    paddingBottom: 20,
+    backgroundColor: '#468ef7',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor: '#fbfbfb',
+    paddingBottom: 10,
+    paddingTop: 10
+  },
+  content: {
     flex: 1
   },
-  main: {
-    container: {
-      flexDirection: 'row',
-      padding: 15,
-      paddingBottom: 20,
-      backgroundColor: '#f7f7f7'
-    },
-    actions: {
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      backgroundColor: '#fbfbfb',
-      paddingBottom: 10,
-      paddingTop: 10
-    },
-    content: {
-      flex: 1
-    },
-    avatar: {
-      width: 55,
-      height: 55,
-      borderRadius: 10,
-      marginRight: 15,
-      marginTop: 7
-    },
-    username: {
-      fontSize: 25,
-      fontWeight: 'bold'
-    },
-    description: {
-      fontSize: 16
-    }
+  avatar: {
+    width: 110,
+    height: 110,
+    borderRadius: 100,
+    marginTop: 7,
+    marginBottom: 5,
+    borderWidth: 2,
+    borderColor: 'white'
+  },
+  username: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'white'
+  },
+  description: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'white'
+  },
+  userList: {
+    marginTop: -1
+  },
+  tabView: {
+    // paddingTop: 5
+  },
+  tabBarUnderlineStyle: {
+    backgroundColor : colors.primary2
   }
 };
 
@@ -116,7 +169,8 @@ export default connect(
     const comments = commentsInState.items
       .map(commentId => commentsInState.hashMap[commentId])
       .filter(({ userId }) => userId === user.id);
-    return { user, comments };
+    const usersSeen = _.get(user, 'seen', []);
+    return { user, comments, usersSeen };
   },
   { fetchUserById },
 )(UserProfile);

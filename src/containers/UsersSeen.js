@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, ActivityIndicator, View, Text } from 'react-native';
+import { ScrollView, ActivityIndicator, View } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
@@ -14,17 +14,8 @@ class UsersSeen extends React.Component {
         <ActivityIndicator size={100} style={styles.spinner} />
       );
     }
-    const currentUser = this.props.currentUser;
     return (
       <View style={styles.container}>
-        {/* <Text style={styles.listLabel}>You</Text> */}
-        <ListItem
-          roundAvatar
-          avatar={this.props.currentUser.avatar}
-          title={`${currentUser.firstName} ${currentUser.lastName}`}
-          subtitle={currentUser.description}
-          onPress={() => this.onUserPress(currentUser.id)}
-        />
         <SearchBar
           onChangeText={searchVal => this.handleSearch(searchVal)}
           lightTheme
@@ -62,11 +53,6 @@ class UsersSeen extends React.Component {
         avatar: React.PropTypes.string
       })
     ),
-    currentUser: React.PropTypes.shape({
-      firstName: React.PropTypes.string,
-      lastName: React.PropTypes.string,
-      avatar: React.PropTypes.string
-    }),
     fetchCurrentUser: React.PropTypes.func
   }
 
@@ -136,10 +122,9 @@ const styles = {
 export default connect(
   ({ users }) => {
     const currentUserId = _.get(users, 'currentUser.id', null);
-    const currentUser = _.get(users, ['hashMap', currentUserId], {});
     const usersSeen = _.get(users, ['hashMap', currentUserId, 'seen'], null);
 
-    return { usersSeen, currentUser };
+    return { usersSeen };
   },
   { fetchCurrentUser }
 )(UsersSeen);

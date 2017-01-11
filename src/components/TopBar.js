@@ -8,7 +8,7 @@ class TopBar extends React.Component {
     return (
       <TouchableHighlight onPress={() => this.props.onPress()}>
         <View style={styles.topBar}>
-          <Icon name="chevron-left" />
+          <Icon name="chevron-left" color="white" />
           <Text style={styles.topBarText}>{this.props.textValue}</Text>
         </View>
       </TouchableHighlight>
@@ -25,14 +25,15 @@ class TopBar extends React.Component {
 const styles = {
   topBar: {
     alignItems: 'center',
-    backgroundColor: '#f3f3f3',
+    backgroundColor: '#3d87f0',
     height: 50,
     flexDirection: 'row',
     paddingLeft: 10
   },
   topBarText: {
     fontSize: 17,
-    marginLeft: 20
+    marginLeft: 20,
+    color: 'white'
   }
 };
 

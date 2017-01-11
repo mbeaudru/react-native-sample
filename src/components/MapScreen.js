@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   StyleSheet,
-  View
+  View,
+  StatusBar
 } from 'react-native';
 import MapView from 'react-native-maps';
 import { Icon } from 'react-native-elements';
@@ -15,11 +16,15 @@ class MapScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
+        <StatusBar
+          backgroundColor={colors.statusBar}
+          hidden={false}
+          barStyle="light-content"
+        />
         <MapView
           style={styles.map}
           showsUserLocation
-          zoomEnabled={false}
+          zoomEnabled
           mapType="terrain"
           showsMyLocationButton
           initialRegion={this.state.region}
@@ -90,8 +95,8 @@ class MapScreen extends React.Component {
 
   state = {
     region: {
-      latitude: 48.884,
-      longitude: 2.353,
+      latitude: 48.8245,
+      longitude: 2.2798,
       latitudeDelta: 0.005,
       longitudeDelta: 0.005
     },
@@ -125,7 +130,7 @@ class MapScreen extends React.Component {
         const region = Object.assign(
           {},
           { latitude, longitude },
-          { latitudeDelta: 0.01, longitudeDelta: 0.01}
+          { latitudeDelta: 0.005, longitudeDelta: 0.005}
         );
         this.setState({ region });
       },

@@ -21,9 +21,11 @@ class TabBar extends React.Component {
           title={this.state.selectedTab === 'map' ? 'Map' : null}
           titleStyle={styles.tabTitle}
           selectedTitleStyle={styles.selectedTabTitle}
-          renderIcon={() => <Icon name="map" size={26} />}
+          renderIcon={() =>
+            <Icon name="map" size={26} color={colors.tabIconColor} />
+          }
           renderSelectedIcon={() =>
-            <Icon name="map" size={26} color={colors.primary2} />
+            <Icon name="map" size={26} color="white" />
           }
         >
           <View style={styles.tabChildrenContainer}>
@@ -37,9 +39,11 @@ class TabBar extends React.Component {
           title={this.state.selectedTab === 'commentsList' ? 'Comments' : null}
           titleStyle={styles.tabTitle}
           selectedTitleStyle={styles.selectedTabTitle}
-          renderIcon={() => <Icon name="chat" size={26} />}
+          renderIcon={() =>
+            <Icon name="chat" size={26} color={colors.tabIconColor} />
+          }
           renderSelectedIcon={() =>
-            <Icon name="chat" size={26} color={colors.primary2} />
+            <Icon name="chat" size={26} color="white" />
           }
         >
           <View style={styles.tabChildrenContainer}>
@@ -53,9 +57,11 @@ class TabBar extends React.Component {
           title={this.state.selectedTab === 'seen' ? 'Users' : null}
           titleStyle={styles.tabTitle}
           selectedTitleStyle={styles.selectedTabTitle}
-          renderIcon={() => <Icon name="people" size={26} />}
+          renderIcon={() =>
+            <Icon name="people" size={26} color={colors.tabIconColor} />
+          }
           renderSelectedIcon={() =>
-            <Icon name="people" size={26} color={colors.primary2} />
+            <Icon name="people" size={26} color="white" />
           }
         >
           <View style={styles.tabChildrenContainer}>
@@ -80,6 +86,7 @@ const styles = {
   tabBarStyle: {
     flex: 1,
     top: 0,
+    backgroundColor: colors.primary2
   },
   tabBarShadowStyle: {
     bottom: 0,
@@ -94,10 +101,13 @@ const styles = {
     fontWeight: 'bold',
     marginBottom: 4,
     marginTop: -1,
-    color: colors.primary2
+    color: 'white'
   },
   tabBarHack: {
     marginBottom: -50
+  },
+  tabTitle: {
+    color: 'red'
   }
 };
 

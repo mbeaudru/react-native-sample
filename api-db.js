@@ -39,8 +39,8 @@ const comments = [...Array(commentsNb)].map((e, id) => {
       userId: Math.floor(Math.random() * usersNb),
       description: faker.lorem.sentences(),
       coordinate: {
-        latitude: 48.884 + (Math.random() - 0.5) * 0.01,
-        longitude: 2.353 + (Math.random() - 0.5) * 0.01,
+        latitude: 48.8245 + (Math.random() - 0.5) * 0.02,
+        longitude: 2.2798 + (Math.random() - 0.5) * 0.02,
         latitudeDelta: 0.005,
         longitudeDelta: 0.005
       }
@@ -72,8 +72,8 @@ const chatrooms = [...Array(chatroomsNb)].map(() => {
     users: chatUsers,
     color: faker.internet.color(),
     coordinate: {
-      latitude: 48.884 + (Math.random() - 0.5) * 0.01,
-      longitude: 2.353 + (Math.random() - 0.5) * 0.01,
+      latitude: 48.8245 + (Math.random() - 0.5) * 0.01,
+      longitude: 2.2798 + (Math.random() - 0.5) * 0.01,
       latitudeDelta: 0.005,
       longitudeDelta: 0.005
     }
