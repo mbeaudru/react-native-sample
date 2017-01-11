@@ -1,4 +1,3 @@
-
 const colors = {
   danger: '#F44336',
   primary1: '#37474F',

@@ -5,8 +5,11 @@
 const faker = require('faker');
 const fs = require('fs');
 
+// TODO: Improve performances in the app bcz if usersNb / commentsNb increase
+// it becomes a nightmare
 const usersNb = 50;
-const commentsNb = 30;
+const friendsNb = 30;
+const commentsNb = 100;
 const maxRepliesNb = 20;
 const chatroomsNb = 5;
 
@@ -22,7 +25,7 @@ const usersBase = [...Array(usersNb)].map((e, id) => generateUser(id));
 
 const users = usersBase.map((user, id) =>
   Object.assign({}, user, {
-    seen: [...Array(Math.floor(Math.random() * usersNb))].map(() =>
+    seen: [...Array(Math.floor(Math.random() * friendsNb))].map(() =>
       usersBase[Math.floor(Math.random() * usersNb)]
     )
   })
@@ -88,7 +91,7 @@ const getCurrentUser = {
   lastName: faker.name.lastName(),
   avatar: faker.image.avatar(),
   description: faker.lorem.words(),
-  seen: [...Array(Math.floor(Math.random() * usersNb))].map(() =>
+  seen: [...Array(Math.floor(Math.random() * friendsNb))].map(() =>
     usersBase[Math.floor(Math.random() * usersNb)]
   )
 };
