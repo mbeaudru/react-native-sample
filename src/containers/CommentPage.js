@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { View, ScrollView } from 'react-native';
+import {
+  View, ScrollView, InteractionManager, ActivityIndicator
+} from 'react-native';
 import CommentItem from '../components/CommentItem';
 import TopBar from '../components/TopBar';
 import { fetchCommentById } from '../actions/comments';
@@ -17,14 +19,18 @@ class CommentPage extends React.Component {
         <ScrollView>
           <CommentItem
             comment={this.props.comment}
-            onAvatarPress={userId => Actions.userProfile({ userId })}
+            onAvatarPress={user => Actions.userProfile({ user })}
           />
+
+          {this.props.replies.length === 0 &&
+            <ActivityIndicator size={60} style={styles.spinner} />
+          }
 
           {this.props.replies.map((comment, key) =>
             <CommentItem
               key={key}
               comment={comment}
-              onAvatarPress={userId => Actions.userProfile({ userId })}
+              onAvatarPress={user => Actions.userProfile({ user })}
               small
             />
           )}
@@ -53,8 +59,10 @@ class CommentPage extends React.Component {
     replies: []
   }
 
-  componentWillMount() {
-    this.props.fetchCommentById(this.props.comment.id);
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.props.fetchCommentById(this.props.comment.id);
+    });
   }
 
 }
@@ -62,6 +70,11 @@ class CommentPage extends React.Component {
 const styles = {
   container: {
     flex: 1
+  },
+  spinner: {
+    flex: 1,
+    justifyContent: 'center',
+    marginTop: 100
   }
 };
 

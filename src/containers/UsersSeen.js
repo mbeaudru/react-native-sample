@@ -28,16 +28,19 @@ class UsersSeen extends React.Component {
             {
               this.props.usersSeen
                 .filter(user => this.filterUserBySearchValue(user))
-                .map(({ id, firstName, lastName, avatar, description }, key) =>
-                  <ListItem
-                    key={key}
-                    roundAvatar
-                    avatar={avatar}
-                    title={`${firstName} ${lastName}`}
-                    subtitle={description}
-                    onPress={() => this.onUserPress(id)}
-                  />
-                )
+                .map((user, key) =>{
+                  const { firstName, lastName, avatar, description } = user;
+                  return (
+                    <ListItem
+                      key={key}
+                      roundAvatar
+                      avatar={avatar}
+                      title={`${firstName} ${lastName}`}
+                      subtitle={description}
+                      onPress={() => this.onUserPress(user)}
+                    />
+                  );
+                })
             }
           </List>
         </ScrollView>
@@ -87,8 +90,8 @@ class UsersSeen extends React.Component {
     return false;
   }
 
-  onUserPress(userId) {
-    Actions.userProfile({ userId });
+  onUserPress(user) {
+    Actions.userProfile({ user });
   }
 
 }

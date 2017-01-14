@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import CommentsList from '../components/CommentsList';
 import { Actions } from 'react-native-router-flux';
 import { fetchNearComments } from '../actions/comments';
-
+import { InteractionManager } from 'react-native';
 import React from 'react';
 
 class CommentsListHOC extends React.Component {
@@ -16,8 +16,10 @@ class CommentsListHOC extends React.Component {
     );
   }
 
-  componentWillMount() {
-    this.props.fetchNearComments();
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.props.fetchNearComments();
+    });
   }
 
   goToCommentPage({ id: commentId }) {

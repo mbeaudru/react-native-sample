@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, ScrollView, Image } from 'react-native';
+import {
+  View, Text, ScrollView, Image, InteractionManager
+} from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { fetchUserById } from '../actions/users';
@@ -45,16 +47,19 @@ class UserProfile extends React.Component {
             <List tabLabel="Users seen" containerStyle={styles.userList}>
               {
                 this.props.usersSeen.map(
-                  ({ id, firstName, lastName, avatar, description }, key) =>
-                    <ListItem
-                      key={key}
-                      roundAvatar
-                      avatar={avatar}
-                      title={`${firstName} ${lastName}`}
-                      subtitle={description}
-                      onPress={() => this.onUserPress(id)}
-                    />
-                  )
+                  (user, key) => {
+                    const { firstName, lastName, avatar, description } = user;
+                    return (
+                      <ListItem
+                        key={key}
+                        roundAvatar
+                        avatar={avatar}
+                        title={`${firstName} ${lastName}`}
+                        subtitle={description}
+                        onPress={() => this.onUserPress(user)}
+                      />
+                    );
+                  })
               }
             </List>
           </ScrollableTabView>
@@ -98,17 +103,19 @@ class UserProfile extends React.Component {
     };
   }
 
-  componentWillMount() {
-    const userId = _.get(this.props.user, 'id', null);
-    this.props.fetchUserById(userId);
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      const userId = _.get(this.props.user, 'id', null);
+      this.props.fetchUserById(userId);
+    });
   }
 
   goToCommentPage({ id: commentId }) {
     Actions.commentPage({ title: 'A comment', commentId });
   }
 
-  onUserPress(userId) {
-    Actions.userProfile({ userId });
+  onUserPress(user) {
+    Actions.userProfile({ user });
   }
 
 }
@@ -164,8 +171,10 @@ const styles = {
 };
 
 export default connect(
-  ({ users, comments: commentsInState }, { userId }) => {
-    const user = _.get(users, ['hashMap', userId], { id: userId });
+  ({ users, comments: commentsInState }, { user: userPassed }) => {
+    const userId = _.get(userPassed, 'id', null);
+    const userInState = _.get(users, ['hashMap', userId], { id: userId });
+    const user = _.merge({}, userPassed, userInState);
     const comments = commentsInState.items
       .map(commentId => commentsInState.hashMap[commentId])
       .filter(({ userId }) => userId === user.id);

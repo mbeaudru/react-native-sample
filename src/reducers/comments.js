@@ -4,12 +4,11 @@ export default function comments(state = { items: [], hashMap: {} }, action) {
   switch(action.type) {
     case 'FETCH_COMMENTS': {
       const fetchedItems = [];
-      const hashMap = action.comments
-        .map(comment => {
-          fetchedItems.push(comment.id);
-          return { [`${comment.id}`]: comment };
-        })
-        .reduce((prev, next) => Object.assign({}, prev, next), {});
+      const hashMap = {};
+      for (const comment of action.comments) {
+        fetchedItems.push(comment.id);
+        hashMap[comment.id] = comment;
+      }
       const items = _.uniq([...state.items, ...fetchedItems]);
       return _.merge({}, state, {
         items,

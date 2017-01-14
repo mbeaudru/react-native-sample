@@ -15,7 +15,7 @@ class CommentItem extends React.Component {
         <View style={styles.main.container}>
           <TouchableHighlight
             underlayColor={styles.main.container.backgroundColor}
-            onPress={() => this.props.onAvatarPress(user.id)}
+            onPress={() => this.props.onAvatarPress(user)}
           >
             <Image
               style={styles.main.avatar}
