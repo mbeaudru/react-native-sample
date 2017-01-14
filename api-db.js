@@ -9,7 +9,7 @@ const fs = require('fs');
 // it becomes a nightmare
 const usersNb = 50;
 const friendsNb = 30;
-const commentsNb = 100;
+const commentsNb = 30;
 const maxRepliesNb = 20;
 const chatroomsNb = 5;
 
@@ -39,8 +39,8 @@ const comments = [...Array(commentsNb)].map((e, id) => {
       userId: Math.floor(Math.random() * usersNb),
       description: faker.lorem.sentences(),
       coordinate: {
-        latitude: 48.8245 + (Math.random() - 0.5) * 0.02,
-        longitude: 2.2798 + (Math.random() - 0.5) * 0.02,
+        latitude: 48.8245 + (Math.random() - 0.5) * 0.01,
+        longitude: 2.2798 + (Math.random() - 0.5) * 0.01,
         latitudeDelta: 0.005,
         longitudeDelta: 0.005
       },
