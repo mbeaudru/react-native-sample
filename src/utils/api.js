@@ -2,12 +2,10 @@ import _ from 'lodash';
 import { SERVER_URL } from './server-configuration';
 
 // USER MANAGEMENT
-export const CHECK_USER_TOKEN = () =>  `${SERVER_URL}/uaa/oauth/check_token`;
-export const USER_TOKEN = () =>  `${SERVER_URL}/uaa/oauth/token`;
-export const CURRENT_USER = () =>  `${SERVER_URL}/uaa/users/current`;
-export const CURRENT_USER_PICTURE = () =>  `${SERVER_URL}/uaa/users/current`;
-export const REGISTER_USER = () =>  `${SERVER_URL}/register`;
+export const USERS = () => `${SERVER_URL}/users`;
 export const USERS_$ID = (userId) => `${SERVER_URL}/users/${userId}`;
+export const USERS_$FIRSTNAME_$LASTNAME = (firstName, lastName) =>
+  `${SERVER_URL}/users?firstName=${firstName}&lastName=${lastName}`;
 
 // COMMENTS
 // TODO: Remove expand parameter in prod

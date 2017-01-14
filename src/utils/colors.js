@@ -4,6 +4,7 @@ const colors = {
   topBar: '#3d87f0',
   primary1: '#37474F',
   primary2: '#468ef7',
+  secondary2: '#46bdf7',
   primary3: '#5c9bf7',
 
   bck1: '#f7f7f7',

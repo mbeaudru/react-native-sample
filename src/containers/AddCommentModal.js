@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import AddCommentModal from '../components/AddCommentModal';
+import CommentForm from '../components/CommentForm';
 import { v1 } from 'node-uuid';
 import {
   addComment, toggleAddCommentModalVisibility
@@ -11,11 +11,11 @@ class AddCommentModalHOC extends React.Component {
 
   render() {
     return (
-      <AddCommentModal
+      <CommentForm
         onTopBarPress={this.props.toggleAddCommentModalVisibility}
         topBarText="New comment"
         visible={this.props.visible}
-        addComment={this.addComment}
+        onSubmit={this.addComment}
       />
     );
   }

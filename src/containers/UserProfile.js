@@ -44,7 +44,7 @@ class UserProfile extends React.Component {
               comments={this.props.comments}
               onCommentClick={comment => { this.goToCommentPage(comment); }}
             />
-            <List tabLabel="Users seen" containerStyle={styles.userList}>
+            <List tabLabel="Following" containerStyle={styles.userList}>
               {
                 this.props.usersSeen.map(
                   (user, key) => {

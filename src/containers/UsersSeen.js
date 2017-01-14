@@ -4,7 +4,6 @@ import { ScrollView, ActivityIndicator, View } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
-import { fetchCurrentUser } from '../actions/users';
 
 class UsersSeen extends React.Component {
 
@@ -55,8 +54,7 @@ class UsersSeen extends React.Component {
         lastName: React.PropTypes.string,
         avatar: React.PropTypes.string
       })
-    ),
-    fetchCurrentUser: React.PropTypes.func
+    )
   }
 
   static defaultProps = {
@@ -69,10 +67,6 @@ class UsersSeen extends React.Component {
     this.state = {
       searchVal: null
     };
-  }
-
-  componentWillMount() {
-    this.props.fetchCurrentUser();
   }
 
   handleSearch(searchVal) {
@@ -129,5 +123,5 @@ export default connect(
 
     return { usersSeen };
   },
-  { fetchCurrentUser }
+  {}
 )(UsersSeen);

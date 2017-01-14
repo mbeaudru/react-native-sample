@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, Text } from 'react-native';
+import { Modal, View } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import TopBar from './TopBar';
 import colors from '../utils/colors';
@@ -30,7 +30,7 @@ class AddCommentModal extends React.Component {
             title="Create comment"
             buttonStyle={styles.submitBtn}
             onPress={() => {
-              this.props.addComment(this.state.commentForm);
+              this.props.onSubmit(this.state.commentForm);
               this.setState({ commentForm: {} });
             }}
           />
@@ -40,7 +40,7 @@ class AddCommentModal extends React.Component {
   }
 
   static propTypes = {
-    addComment: React.PropTypes.func,
+    onSubmit: React.PropTypes.func,
     onTopBarPress: React.PropTypes.func,
     visible: React.PropTypes.bool,
     topBarText: React.PropTypes.string

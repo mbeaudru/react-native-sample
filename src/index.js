@@ -2,6 +2,7 @@ import {Scene, Router} from 'react-native-router-flux';
 import TabBar from './components/TabBar';
 import CommentPage from './containers/CommentPage';
 import UserProfile from './containers/UserProfile';
+import LoginForm from './containers/LoginForm';
 import AddReply from './containers/AddReply';
 import reducers from './reducers';
 import { createStore, applyMiddleware } from 'redux';
@@ -25,6 +26,7 @@ const Root = () => (
         titleStyle={styles.navBarStyle.title}
       >
         <Scene key="tabBar" hideNavBar component={TabBar} />
+        <Scene key="loginForm" hideNavBar component={LoginForm} duration={0} />
         <Scene key="commentPage" hideNavBar component={CommentPage} />
         <Scene key="userProfile" hideNavBar component={UserProfile} />
         <Scene key="addReply" hideNavBar component={AddReply} />

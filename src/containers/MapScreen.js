@@ -5,8 +5,8 @@ import {
   toggleAddCommentModalVisibility,
   fetchNearComments
 } from '../actions/comments';
-import { fetchCurrentUser } from '../actions/users';
 import { Actions } from 'react-native-router-flux';
+import _ from 'lodash';
 
 class MapScreenHOC extends React.Component {
 
@@ -27,27 +27,31 @@ class MapScreenHOC extends React.Component {
     comments: React.PropTypes.arrayOf(
       React.PropTypes.shape
     ),
+    currentUserId: React.PropTypes.string,
+
     toggleAddCommentModalVisibility: React.PropTypes.func,
-    fetchNearComments: React.PropTypes.func,
-    fetchCurrentUser: React.PropTypes.func,
+    fetchNearComments: React.PropTypes.func
   }
 
   componentWillMount() {
     this.props.fetchNearComments();
-    this.props.fetchCurrentUser();
+    if (!this.props.currentUserId) {
+      Actions.loginForm();
+    }
   }
 
 }
 
 export default connect(
-  ({ comments: commentsInState }) => {
+  ({ comments: commentsInState, users }) => {
     const { items = [], hashMap = {} } = commentsInState;
     const comments = items.map(commentId => hashMap[commentId]);
-    return { comments };
+
+    const currentUserId = _.get(users, ['currentUser', 'id'], null);
+    return { comments, currentUserId };
   },
   {
     toggleAddCommentModalVisibility,
-    fetchNearComments,
-    fetchCurrentUser
+    fetchNearComments
   },
 )(MapScreenHOC);

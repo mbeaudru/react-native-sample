@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import AddCommentModal from '../components/AddCommentModal';
+import CommentForm from '../components/CommentForm';
 import { Actions } from 'react-native-router-flux';
 import { v1 } from 'node-uuid';
 import { addReply } from '../actions/comments';
@@ -10,11 +10,11 @@ class AddReply extends React.Component {
 
   render() {
     return (
-      <AddCommentModal
+      <CommentForm
         topBarText="New reply"
         onTopBarPress={Actions.pop}
         visible
-        addComment={this.addReply}
+        onSubmit={this.addReply}
       />
     );
   }
