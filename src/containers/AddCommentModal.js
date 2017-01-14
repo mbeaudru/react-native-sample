@@ -12,6 +12,8 @@ class AddCommentModalHOC extends React.Component {
   render() {
     return (
       <AddCommentModal
+        onTopBarPress={this.props.toggleAddCommentModalVisibility}
+        topBarText="New comment"
         visible={this.props.visible}
         addComment={this.addComment}
       />

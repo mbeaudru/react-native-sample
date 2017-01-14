@@ -19,6 +19,7 @@ module.exports = {
     "extends": ["eslint:recommended", "plugin:react/recommended", "airbnb", "react-native"],
     "parser": "babel-eslint",
     "rules": {
+        "react/jsx-handler-names": 0,
         "react/require-extension": "off", // https://github.com/AtomLinter/linter-eslint/issues/579#issuecomment-239143599
         "react/no-unused-prop-types": [1, { skipShapeProps: true }],
         "import/no-namespace": 0,

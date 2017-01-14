@@ -44,6 +44,7 @@ class CommentItem extends React.Component {
             backgroundColor={styles.main.actions.backgroundColor}
             icon="reply" text="Reply"
             size={this.getIconSize()} hideLabel={this.props.small}
+            onPress={this.props.onReplyPress}
           />}
         </View>
       </View>
@@ -57,7 +58,8 @@ class CommentItem extends React.Component {
     liked: React.PropTypes.bool,
     small: React.PropTypes.bool,
     onAvatarPress: React.PropTypes.func,
-    onLikePress: React.PropTypes.func
+    onLikePress: React.PropTypes.func,
+    onReplyPress: React.PropTypes.func
   }
 
   static defaultProps = {

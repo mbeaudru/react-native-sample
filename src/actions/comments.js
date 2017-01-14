@@ -2,6 +2,8 @@ import * as types from '../utils/constants';
 import * as api from '../utils/api';
 import _ from 'lodash';
 
+/* eslint-disable no-console */
+
 export function fetchNearComments() {
   return (dispatch, getState) => {
     fetch(api.NEAR_COMMENTS(), api.headerToken(getState()))
@@ -93,7 +95,31 @@ export function likeReply(replyToUpdate) {
       }
     });
 
-    fetch(api.COMMENT_REPLIES_$ID(reply.id), queryParams)
+    fetch(api.REPLIES_$ID(reply.id), queryParams)
+      .then(() => {
+        fetch(api.COMMENTS_$ID(reply.commentId))
+          .then(res => res.json())
+          .then(comment => dispatch({
+            type: types.FETCH_COMMENT,
+            comment
+          }))
+          .catch(err => console.error(err));
+      })
+      .catch(err => console.error(err));
+  };
+}
+
+export function addReply(reply) {
+  return (dispatch, getState) => {
+    const queryParams = _.merge({}, api.headerToken(getState()), {
+      method: "POST",
+      body: JSON.stringify(reply),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    fetch(api.REPLIES(), queryParams)
       .then(() => {
         fetch(api.COMMENTS_$ID(reply.commentId))
           .then(res => res.json())

@@ -6,7 +6,9 @@ import {
 } from 'react-native';
 import CommentItem from '../components/CommentItem';
 import TopBar from '../components/TopBar';
-import { fetchCommentById, likeComment, likeReply } from '../actions/comments';
+import {
+  fetchCommentById, likeComment, likeReply
+} from '../actions/comments';
 import _ from 'lodash';
 
 class CommentPage extends React.Component {
@@ -28,6 +30,7 @@ class CommentPage extends React.Component {
               })
             }
             onLikePress={() => this.props.likeComment(this.props.comment)}
+            onReplyPress={() => this.onReplyPress(this.props.comment.id)}
           />
 
           {this.props.replies ?
@@ -44,6 +47,7 @@ class CommentPage extends React.Component {
                   })
                 }
                 onLikePress={() => this.props.likeReply(comment)}
+                onReplyPress={() => this.onReplyPress(this.props.comment.id)}
                 small
               />
             )
@@ -82,6 +86,10 @@ class CommentPage extends React.Component {
     InteractionManager.runAfterInteractions(() => {
       this.props.fetchCommentById(this.props.comment.id);
     });
+  }
+
+  onReplyPress(commentId) {
+    Actions.addReply({ commentId });
   }
 
 }

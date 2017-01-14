@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, View, Text } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
+import TopBar from './TopBar';
 import colors from '../utils/colors';
 
 class AddCommentModal extends React.Component {
@@ -14,7 +15,10 @@ class AddCommentModal extends React.Component {
         onRequestClose={() => {}}
       >
         <View>
-          <Text style={styles.headerTitle}>New comment</Text>
+          <TopBar
+            onPress={this.props.onTopBarPress}
+            textValue={this.props.topBarText}
+          />
           <FormLabel>Description</FormLabel>
           <FormInput
             value={this.state.commentForm.description}
@@ -37,7 +41,9 @@ class AddCommentModal extends React.Component {
 
   static propTypes = {
     addComment: React.PropTypes.func,
-    visible: React.PropTypes.bool
+    onTopBarPress: React.PropTypes.func,
+    visible: React.PropTypes.bool,
+    topBarText: React.PropTypes.string
   }
 
   constructor(props) {
