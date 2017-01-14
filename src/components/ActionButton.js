@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 class ActionButton extends React.Component {
@@ -7,16 +7,21 @@ class ActionButton extends React.Component {
   render() {
     const sizeStyle = this.getSize(this.props.size);
     return (
-      <View>
-        <Icon
-          name={this.props.icon}
-          size={sizeStyle.icon.size}
-          color={this.props.textColor}
-        />
-        {!this.props.hideLabel &&
-          <Text style={sizeStyle.text}>{this.props.text}</Text>
-        }
-      </View>
+      <TouchableHighlight
+        onPress={this.props.onPress}
+        underlayColor={this.props.backgroundColor}
+      >
+        <View>
+          <Icon
+            name={this.props.icon}
+            size={sizeStyle.icon.size}
+            color={this.props.textColor}
+          />
+          {!this.props.hideLabel &&
+            <Text style={sizeStyle.text}>{this.props.text}</Text>
+          }
+        </View>
+      </TouchableHighlight>
     );
   }
 
@@ -25,7 +30,10 @@ class ActionButton extends React.Component {
     text: React.PropTypes.string,
     size: React.PropTypes.string,
     hideLabel: React.PropTypes.bool,
-    textColor: React.PropTypes.string
+    textColor: React.PropTypes.string,
+
+    onPress: React.PropTypes.func,
+    backgroundColor: React.PropTypes.string
   }
 
   static defaultProps = {

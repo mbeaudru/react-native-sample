@@ -20,6 +20,7 @@ export default function comments(state = { items: [], hashMap: {} }, action) {
       const hashMap = _.merge({}, state.hashMap, {
         [`${action.comment.id}`]: action.comment
       });
+
       return _.merge({}, state, {
         items,
         hashMap

@@ -37,17 +37,73 @@ export function addComment(comment = {}) {
     });
 
     fetch(api.NEAR_COMMENTS(), queryParams)
-    .then(res => res.json())
     .then(() => {
-      fetch(api.NEAR_COMMENTS())
+      fetch(api.COMMENTS_$ID(comment.id))
         .then(res => res.json())
-        .then(comments => dispatch({
-          type: types.FETCH_COMMENTS,
-          comments
+        .then(comment => dispatch({
+          type: types.FETCH_COMMENT,
+          comment
         }))
         .catch(err => console.error(err));
     })
     .catch(err => console.error(err));
+  };
+}
+
+export function likeComment(commentToUpdate) {
+  return (dispatch, getState) => {
+    const comment = _.merge({}, commentToUpdate, {
+      liked: !commentToUpdate.liked
+    });
+
+    const queryParams = _.merge({}, api.headerToken(getState()), {
+      method: "PUT",
+      body: JSON.stringify(comment),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    dispatch({
+      type: types.FETCH_COMMENT,
+      comment
+    });
+
+    fetch(api.COMMENTS_$ID(comment.id), queryParams)
+      .then(res => res.json())
+      .then(comment => dispatch({
+        type: types.FETCH_COMMENT,
+        comment
+      }))
+      .catch(err => console.error(err));
+  };
+}
+
+export function likeReply(replyToUpdate) {
+  return (dispatch, getState) => {
+    const reply = _.merge({}, replyToUpdate, {
+      liked: !replyToUpdate.liked
+    });
+
+    const queryParams = _.merge({}, api.headerToken(getState()), {
+      method: "PUT",
+      body: JSON.stringify(reply),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    fetch(api.COMMENT_REPLIES_$ID(reply.id), queryParams)
+      .then(() => {
+        fetch(api.COMMENTS_$ID(reply.commentId))
+          .then(res => res.json())
+          .then(comment => dispatch({
+            type: types.FETCH_COMMENT,
+            comment
+          }))
+          .catch(err => console.error(err));
+      })
+      .catch(err => console.error(err));
   };
 }
 

@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import CommentItem from '../components/CommentItem';
 import TopBar from '../components/TopBar';
-import { fetchCommentById } from '../actions/comments';
+import { fetchCommentById, likeComment, likeReply } from '../actions/comments';
 import _ from 'lodash';
 
 class CommentPage extends React.Component {
@@ -18,22 +18,37 @@ class CommentPage extends React.Component {
 
         <ScrollView>
           <CommentItem
-            comment={this.props.comment}
-            onAvatarPress={user => Actions.userProfile({ user })}
+            avatar={this.props.comment.user.avatar}
+            title={this.props.comment.user.firstName}
+            description={this.props.comment.description}
+            liked={this.props.comment.liked}
+            onAvatarPress={() =>
+              Actions.userProfile({
+                user: this.props.comment.user
+              })
+            }
+            onLikePress={() => this.props.likeComment(this.props.comment)}
           />
 
-          {this.props.replies.length === 0 &&
-            <ActivityIndicator size={60} style={styles.spinner} />
+          {this.props.replies ?
+            this.props.replies.map((comment, key) =>
+              <CommentItem
+                key={key}
+                avatar={comment.user.avatar}
+                title={comment.user.firstName}
+                description={comment.description}
+                liked={comment.liked}
+                onAvatarPress={() =>
+                  Actions.userProfile({
+                    user: comment.user
+                  })
+                }
+                onLikePress={() => this.props.likeReply(comment)}
+                small
+              />
+            )
+            : <ActivityIndicator size={60} style={styles.spinner} />
           }
-
-          {this.props.replies.map((comment, key) =>
-            <CommentItem
-              key={key}
-              comment={comment}
-              onAvatarPress={user => Actions.userProfile({ user })}
-              small
-            />
-          )}
 
         </ScrollView>
       </View>
@@ -46,17 +61,21 @@ class CommentPage extends React.Component {
         React.PropTypes.number,
         React.PropTypes.string
       ]),
-      description: React.PropTypes.string
+      description: React.PropTypes.string,
+      liked: React.PropTypes.bool,
+      user: React.PropTypes.object
     }),
-    fetchCommentById: React.PropTypes.func,
     replies: React.PropTypes.arrayOf(
       React.PropTypes.object
-    )
+    ),
+
+    likeComment: React.PropTypes.func,
+    likeReply: React.PropTypes.func,
+    fetchCommentById: React.PropTypes.func
   }
 
   static defaultProps = {
-    comment: {},
-    replies: []
+    comment: {}
   }
 
   componentDidMount() {
@@ -81,8 +100,8 @@ const styles = {
 export default connect(
   ({ comments }, ownProps) => {
     const comment = _.get(comments, ['hashMap', ownProps.commentId], {});
-    const replies = _.get(comment, 'replies', []);
+    const replies = comment.replies;
     return { comment, replies };
   },
-  { fetchCommentById },
+  { fetchCommentById, likeComment, likeReply },
 )(CommentPage);

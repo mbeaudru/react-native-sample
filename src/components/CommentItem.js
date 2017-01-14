@@ -7,39 +7,41 @@ import _ from 'lodash';
 class CommentItem extends React.Component {
 
   render() {
-    if (!this.props.comment) return <View />;
+    if (!this.props.title) return <View />;
     const styles = this.getStyles(this.props.small);
-    const user = _.get(this.props.comment, 'user', {});
     return (
       <View>
         <View style={styles.main.container}>
           <TouchableHighlight
             underlayColor={styles.main.container.backgroundColor}
-            onPress={() => this.props.onAvatarPress(user)}
+            onPress={this.props.onAvatarPress}
           >
             <Image
               style={styles.main.avatar}
-              source={{ uri: `${user.avatar}` }}
+              source={{ uri: `${this.props.avatar}` }}
             />
           </TouchableHighlight>
           <View style={styles.main.content}>
             <Text style={styles.main.username}>
-              {user.firstName}
+              {this.props.title}
             </Text>
             <Text style={styles.main.description}>
-              {this.props.comment.description}
+              {this.props.description}
             </Text>
           </View>
         </View>
         <View style={styles.main.actions}>
           <ActionButton
-            textColor={styles.main.actionsColor}
-            icon="star" text="Like"
+            textColor={this.getLikeBtnColor(this.props.liked, styles)}
+            backgroundColor={styles.main.actions.backgroundColor}
+            icon="star" text={this.getLikeBtnText(this.props.liked)}
             size={this.getIconSize()} hideLabel={this.props.small}
+            onPress={this.props.onLikePress}
           />
           {!this.props.small &&
           <ActionButton
             textColor={styles.main.actionsColor}
+            backgroundColor={styles.main.actions.backgroundColor}
             icon="reply" text="Reply"
             size={this.getIconSize()} hideLabel={this.props.small}
           />}
@@ -49,24 +51,13 @@ class CommentItem extends React.Component {
   }
 
   static propTypes = {
-    comment: React.PropTypes.shape({
-      id: React.PropTypes.oneOfType([
-        React.PropTypes.number,
-        React.PropTypes.string
-      ]),
-      user: React.PropTypes.shape({
-        id: React.PropTypes.oneOfType([
-          React.PropTypes.number,
-          React.PropTypes.string
-        ]),
-        firstName: React.PropTypes.string,
-        avatar: React.PropTypes.string
-      }),
-      description: React.PropTypes.string,
-      coordinate: React.PropTypes.object
-    }).isRequired,
+    avatar: React.PropTypes.string,
+    title: React.PropTypes.string,
+    description: React.PropTypes.string,
+    liked: React.PropTypes.bool,
     small: React.PropTypes.bool,
-    onAvatarPress: React.PropTypes.func
+    onAvatarPress: React.PropTypes.func,
+    onLikePress: React.PropTypes.func
   }
 
   static defaultProps = {
@@ -78,6 +69,16 @@ class CommentItem extends React.Component {
     super(props);
 
     this.getIconSize = this.getIconSize.bind(this);
+  }
+
+  getLikeBtnColor(liked, styles) {
+    if (!liked) return styles.main.actionsColor;
+    return '#fbef49';
+  }
+
+  getLikeBtnText(liked) {
+    if (!liked) return 'Like';
+    return 'Liked';
   }
 
   getStyles(small) {

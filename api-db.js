@@ -43,7 +43,8 @@ const comments = [...Array(commentsNb)].map((e, id) => {
         longitude: 2.2798 + (Math.random() - 0.5) * 0.02,
         latitudeDelta: 0.005,
         longitudeDelta: 0.005
-      }
+      },
+      liked: faker.random.boolean()
     }
   );
 });
@@ -56,6 +57,7 @@ const replies = comments
         id: faker.random.uuid(),
         user: replier,
         description: faker.lorem.sentences(),
+        liked: faker.random.boolean(),
 
         commentId: comment.id
       });

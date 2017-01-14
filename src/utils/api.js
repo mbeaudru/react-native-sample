@@ -14,6 +14,7 @@ export const USERS_$ID = (userId) => `${SERVER_URL}/users/${userId}`;
 export const NEAR_COMMENTS = () => `${SERVER_URL}/comments?_expand=user`;
 export const COMMENTS_$ID = (id) => `${SERVER_URL}/comments/${id}`;
 export const COMMENTS_$ID_LIKE = (id) => `${SERVER_URL}/comments/:${id}/like`;
+export const COMMENT_REPLIES_$ID = (id) => `${SERVER_URL}/replies/${id}`;
 
 // SPECIAL
 // HEADER TOKEN GETTER
