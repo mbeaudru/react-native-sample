@@ -26,8 +26,8 @@ const Root = () => (
         navigationBarStyle={styles.navBarStyle.bar}
         titleStyle={styles.navBarStyle.title}
       >
-        <Scene key="tabBar" hideNavBar component={TabBar} />
         <Scene key="loginForm" hideNavBar component={LoginForm} duration={0} />
+        <Scene key="tabBar" hideNavBar component={TabBar} />
         <Scene key="commentPage" hideNavBar component={CommentPage} />
         <Scene key="userProfile" hideNavBar component={UserProfile} />
         <Scene key="addReply" hideNavBar component={AddReply} />
