@@ -4740,6 +4740,10 @@ react-native-action-button:
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/react-native-action-button/-/react-native-action-button-2.0.14.tgz#a18af8bc0cf3c30632a6f43a366c7cc7a74d24c0"
 
+"react-native-camera@https://github.com/lwansbrough/react-native-camera.git":
+  version "0.4.1"
+  resolved "https://github.com/lwansbrough/react-native-camera.git#d116d524429b520101748db69d2c7c1cace2cb41"
+
 react-native-elements:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-0.7.1.tgz#33111db698f4c2e030b540c90d673ad3f67f84e9"

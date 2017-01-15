@@ -38,6 +38,7 @@ class LoginForm extends React.Component {
             Password
           </FormLabel>
           <FormInput
+            secureTextEntry
             value={this.state.form.password}
             onChangeText={value => this.updateForm('password', value)}
           />
