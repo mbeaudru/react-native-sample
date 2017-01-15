@@ -52,6 +52,32 @@ export function loginUser(user) {
   };
 }
 
+export function updateUser(user) {
+  return dispatch => {
+    const queryParams = {
+      method: "PUT",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+
+    fetch(api.USERS_$ID(user.id), queryParams)
+      .then(() => {
+        dispatch({
+          type: types.FETCH_USER,
+          user
+        });
+
+        dispatch({
+          type: types.SET_CURRENT_USER,
+          user
+        });
+      })
+      .catch(err => console.warn(err));
+  };
+}
+
 export function fetchUserById(userId) {
   return (dispatch, getState) => {
     fetch(api.USERS_$ID(userId), api.headerToken(getState()))

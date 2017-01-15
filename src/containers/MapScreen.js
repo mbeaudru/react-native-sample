@@ -7,6 +7,7 @@ import {
 } from '../actions/comments';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
+import { InteractionManager } from 'react-native';
 
 class MapScreenHOC extends React.Component {
 
@@ -34,10 +35,15 @@ class MapScreenHOC extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchNearComments();
     if (!this.props.currentUserId) {
       Actions.loginForm();
     }
+  }
+
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      this.props.fetchNearComments();
+    });
   }
 
 }

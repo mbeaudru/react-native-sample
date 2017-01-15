@@ -39,6 +39,13 @@ export default function users(state = initialState, action) {
         }
       });
     }
+    case 'SET_USER_AVATAR': {
+      return _.merge({}, state, {
+        currentUser: {
+          avatar: action.avatarUrl
+        }
+      });
+    }
     default:
       return state;
   }

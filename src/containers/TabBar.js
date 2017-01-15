@@ -2,9 +2,11 @@ import React from 'react';
 import { Tabs, Tab, Icon } from 'react-native-elements';
 import MapScreen from '../containers/MapScreen';
 import { View } from 'react-native';
-import UsersSeen from '../containers/UsersSeen';
+import { connect } from 'react-redux';
+import UserProfile from '../containers/UserProfile';
 import colors from '../utils/colors';
 import CommentsList from '../containers/CommentsList';
+import _ from 'lodash';
 
 class TabBar extends React.Component {
 
@@ -52,24 +54,35 @@ class TabBar extends React.Component {
         </Tab>
 
         <Tab
-          selected={this.state.selectedTab === 'seen'}
-          onPress={() => this.setState({ selectedTab: 'seen' })}
-          title={this.state.selectedTab === 'seen' ? 'Users' : null}
+          selected={this.state.selectedTab === 'currentUserProfile'}
+          onPress={() => this.setState({ selectedTab: 'currentUserProfile' })}
+          title={
+            this.state.selectedTab === 'currentUserProfile' ? 'Profile' : null
+          }
           titleStyle={styles.tabTitle}
           selectedTitleStyle={styles.selectedTabTitle}
           renderIcon={() =>
-            <Icon name="people" size={26} color={colors.tabIconColor} />
+            <Icon name="person" size={26} color={colors.tabIconColor} />
           }
           renderSelectedIcon={() =>
-            <Icon name="people" size={26} color="white" />
+            <Icon name="person" size={26} color="white" />
           }
         >
           <View style={styles.tabChildrenContainer}>
-            <UsersSeen />
+            <UserProfile user={this.props.currentUser} profilePage />
           </View>
         </Tab>
       </Tabs>
     );
+  }
+
+  static propTypes = {
+    currentUser: React.PropTypes.shape({
+      id: React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number
+      ])
+    })
   }
 
   constructor(props) {
@@ -111,4 +124,10 @@ const styles = {
   }
 };
 
-export default TabBar;
+export default connect(
+  ({ users }) => {
+    const currentUser = _.get(users, 'currentUser', {});
+    return { currentUser };
+  },
+  {}
+)(TabBar);

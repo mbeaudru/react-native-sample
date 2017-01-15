@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, Text, ScrollView, Image, InteractionManager
+  View, Text, ScrollView, Image, InteractionManager, TouchableHighlight
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -17,13 +17,20 @@ class UserProfile extends React.Component {
   render() {
     return (
       <View>
-        <TopBar textValue="User Profile" onPress={() => Actions.pop()} />
+        {!this.props.profilePage &&
+          <TopBar textValue="User Profile" onPress={() => Actions.pop()} />
+        }
         <ScrollView>
           <View style={styles.container}>
-            <Image
-              style={styles.avatar}
-              source={{ uri: `${this.props.user.avatar}` }}
-            />
+            <TouchableHighlight
+              underlayColor={styles.container.backgroundColor}
+              onPress={this.onAvatarPress}
+            >
+              <Image
+                style={styles.avatar}
+                source={{ uri: `${this.props.user.avatar}` }}
+              />
+            </TouchableHighlight>
             <View style={styles.content}>
               <Text style={styles.username}>
                 {this.props.user.firstName}
@@ -92,7 +99,8 @@ class UserProfile extends React.Component {
     fetchUserById: React.PropTypes.func,
     comments: React.PropTypes.arrayOf(
       React.PropTypes.object
-    )
+    ),
+    profilePage: React.PropTypes.bool
   }
 
   constructor(props) {
@@ -101,6 +109,8 @@ class UserProfile extends React.Component {
     this.state = {
       selectedTab: 'comments'
     };
+
+    this.onAvatarPress = this.onAvatarPress.bind(this);
   }
 
   componentDidMount() {
@@ -116,6 +126,12 @@ class UserProfile extends React.Component {
 
   onUserPress(user) {
     Actions.userProfile({ user });
+  }
+
+  onAvatarPress() {
+    if (this.props.profilePage) {
+      Actions.takePicture();
+    }
   }
 
 }
@@ -171,7 +187,10 @@ const styles = {
 };
 
 export default connect(
-  ({ users, comments: commentsInState }, { user: userPassed }) => {
+  (
+    { users, comments: commentsInState },
+    { user: userPassed, profilePage }
+  ) => {
     const userId = _.get(userPassed, 'id', null);
     const userInState = _.get(users, ['hashMap', userId], { id: userId });
     const user = _.merge({}, userPassed, userInState);
@@ -179,7 +198,7 @@ export default connect(
       .map(commentId => commentsInState.hashMap[commentId])
       .filter(({ userId }) => userId === user.id);
     const usersSeen = _.get(user, 'seen', []);
-    return { user, comments, usersSeen };
+    return { user, comments, usersSeen, profilePage };
   },
   { fetchUserById },
 )(UserProfile);

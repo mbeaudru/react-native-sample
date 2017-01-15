@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
 import colors from '../utils/colors';
@@ -112,6 +112,10 @@ class LoginForm extends React.Component {
     };
   }
 
+  onProfilePicture() {
+    Actions.takePicture();
+  }
+
 }
 
 const styles = {
@@ -143,6 +147,21 @@ const styles = {
   },
   labelStyle: {
 
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    height: Dimensions.get('window').height,
+    width: Dimensions.get('window').width
+  },
+  capture: {
+    flex: 0,
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    color: '#000',
+    padding: 10,
+    margin: 40
   }
 };
 
