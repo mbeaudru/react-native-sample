@@ -108,7 +108,8 @@ class LoginForm extends React.Component {
       password: this.state.password,
       description: '',
       avatar: 'http://i.imgur.com/Zp8RQt8.jpg',
-      id: v1()
+      id: v1(),
+      seen: []
     };
   }
 

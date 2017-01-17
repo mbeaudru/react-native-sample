@@ -89,3 +89,68 @@ export function fetchUserById(userId) {
       .catch(err => console.error(err));
   };
 }
+
+export function followUser(userToFollow) {
+  return (dispatch, getState) => {
+    const followed = !userToFollow.followed;
+    const user = _.merge({}, userToFollow, { followed });
+
+    const queryParams = _.merge({}, api.headerToken(getState()), {
+      method: "PUT",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    dispatch({
+      type: types.FETCH_USER,
+      user
+    });
+
+    fetch(api.USERS_$ID(user.id), queryParams)
+      .then(res => res.json())
+      .then(() => {
+        dispatch({
+          type: types.FETCH_USER,
+          user
+        });
+      })
+      .catch(err => console.error(err));
+
+    const currentUserId = _.get(getState(), 'users.currentUser.id', null);
+    let currentUser = _.get(
+      getState(), ['users', 'hashMap', currentUserId], {}
+    );
+    const usersSeen = _.get(currentUser, 'seen', []);
+    if (followed) {
+      currentUser.seen = [...usersSeen, user];
+    } else {
+      const newUsersSeen = usersSeen.filter(usr => usr.id !== user.id);
+      currentUser.seen = newUsersSeen;
+    }
+
+    const queryParams2 = _.merge({}, api.headerToken(getState()), {
+      method: "PUT",
+      body: JSON.stringify(currentUser),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    dispatch({
+      type: types.FETCH_USER,
+      user: currentUser
+    });
+
+    fetch(api.USERS_$ID(currentUserId), queryParams2)
+      .then(res => res.json())
+      .then(() => {
+        dispatch({
+          type: types.FETCH_USER,
+          user: currentUser
+        });
+      })
+      .catch(err => console.error(err));
+  };
+}

@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { fetchUserById } from '../actions/users';
+import { fetchUserById, followUser } from '../actions/users';
 import { Actions } from 'react-native-router-flux';
 import colors from '../utils/colors';
 import CommentsList from '../components/CommentsList';
@@ -39,6 +39,19 @@ class UserProfile extends React.Component {
                 {this.props.user.description}
               </Text>
             </View>
+            {!this.props.currentUserProfile &&
+              <TouchableHighlight
+                underlayColor="#e0e0e0"
+                onPress={() => this.toggleFollow(this.props.user)}
+                style={styles.followBtn}
+              >
+                <View>
+                  <Text style={styles.followBtnText}>
+                    {this.props.user.followed ? 'Unfollow' : 'Follow'}
+                  </Text>
+                </View>
+              </TouchableHighlight>
+            }
           </View>
           <ScrollableTabView
             style={styles.tabView}
@@ -83,7 +96,8 @@ class UserProfile extends React.Component {
       ]),
       firstName: React.PropTypes.string,
       avatar: React.PropTypes.string,
-      description: React.PropTypes.string
+      description: React.PropTypes.string,
+      followed: React.PropTypes.bool
     }),
     usersSeen: React.PropTypes.arrayOf(
       React.PropTypes.shape({
@@ -100,7 +114,9 @@ class UserProfile extends React.Component {
     comments: React.PropTypes.arrayOf(
       React.PropTypes.object
     ),
-    profilePage: React.PropTypes.bool
+    profilePage: React.PropTypes.bool,
+    followUser: React.PropTypes.func,
+    currentUserProfile: React.PropTypes.bool
   }
 
   constructor(props) {
@@ -134,13 +150,17 @@ class UserProfile extends React.Component {
     }
   }
 
+  toggleFollow(user) {
+    this.props.followUser(user);
+  }
+
 }
 
 const styles = {
   container: {
     flexDirection: 'column',
     padding: 15,
-    paddingBottom: 20,
+    paddingBottom: 10,
     backgroundColor: '#468ef7',
     alignItems: 'center',
     justifyContent: 'center'
@@ -183,6 +203,19 @@ const styles = {
   },
   tabBarUnderlineStyle: {
     backgroundColor : colors.primary2
+  },
+  followBtn: {
+    marginTop: 10,
+    marginBottom: 10,
+    paddingLeft: 8,
+    paddingRight: 7,
+    paddingTop: 3,
+    paddingBottom: 4,
+    backgroundColor: 'white',
+    borderRadius: 10
+  },
+  followBtnText: {
+    color: colors.primary2
   }
 };
 
@@ -198,7 +231,10 @@ export default connect(
       .map(commentId => commentsInState.hashMap[commentId])
       .filter(({ userId }) => userId === user.id);
     const usersSeen = _.get(user, 'seen', []);
-    return { user, comments, usersSeen, profilePage };
+
+    const currentUserId = _.get(users, 'currentUser.id', null);
+    const currentUserProfile = userId === currentUserId;
+    return { user, comments, usersSeen, profilePage, currentUserProfile };
   },
-  { fetchUserById },
+  { fetchUserById, followUser },
 )(UserProfile);
