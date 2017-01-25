@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  View, Text, ScrollView, Image, InteractionManager, TouchableHighlight
+  View, Text, ScrollView, Image, InteractionManager, TouchableHighlight,
+  StyleSheet
 } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -156,7 +157,7 @@ class UserProfile extends React.Component {
 
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     padding: 15,
@@ -217,7 +218,7 @@ const styles = {
   followBtnText: {
     color: colors.primary2
   }
-};
+});
 
 export default connect(
   (

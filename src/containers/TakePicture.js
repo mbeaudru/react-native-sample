@@ -1,6 +1,6 @@
 import React from 'react';
 import Camera from 'react-native-camera';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { updateUser } from '../actions/users';
@@ -56,7 +56,7 @@ class TakePicture extends React.Component {
 
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1
   },
@@ -75,7 +75,7 @@ const styles = {
     padding: 10,
     margin: 40
   }
-};
+});
 
 export default connect(
   ({ users }) => {

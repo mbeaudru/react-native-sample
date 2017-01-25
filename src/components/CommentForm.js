@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View } from 'react-native';
+import { Modal, View, StyleSheet } from 'react-native';
 import { FormLabel, FormInput, Button } from 'react-native-elements';
 import TopBar from './TopBar';
 import colors from '../utils/colors';
@@ -66,7 +66,7 @@ class AddCommentModal extends React.Component {
 
 }
 
-const styles = {
+const styles = StyleSheet.create({
   submitBtn: {
     backgroundColor: colors.primary2,
     marginTop: 15
@@ -77,6 +77,6 @@ const styles = {
     textAlign: 'center',
     marginTop: 15
   }
-};
+});
 
 export default AddCommentModal;

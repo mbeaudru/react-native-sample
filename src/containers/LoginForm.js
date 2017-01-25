@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { FormLabel, FormInput, Button, Icon } from 'react-native-elements';
 import colors from '../utils/colors';
@@ -119,7 +119,7 @@ class LoginForm extends React.Component {
 
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1
   },
@@ -164,7 +164,7 @@ const styles = {
     padding: 10,
     margin: 40
   }
-};
+});
 
 export default connect(
   ({ users }) => {

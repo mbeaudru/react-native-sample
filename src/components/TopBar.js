@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 class TopBar extends React.Component {
@@ -22,7 +22,7 @@ class TopBar extends React.Component {
 
 }
 
-const styles = {
+const styles = StyleSheet.create({
   topBar: {
     alignItems: 'center',
     backgroundColor: '#3d87f0',
@@ -35,6 +35,6 @@ const styles = {
     marginLeft: 20,
     color: 'white'
   }
-};
+});
 
 export default TopBar;

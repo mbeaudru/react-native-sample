@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, ActivityIndicator, View } from 'react-native';
+import { ScrollView, ActivityIndicator, View, StyleSheet } from 'react-native';
 import { List, ListItem, SearchBar } from 'react-native-elements';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
@@ -90,7 +90,7 @@ class UsersSeen extends React.Component {
 
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     marginTop: -1
   },
@@ -114,7 +114,7 @@ const styles = {
   inputStyle: {
     backgroundColor: '#f0f0f0'
   }
-};
+});
 
 export default connect(
   ({ users }) => {

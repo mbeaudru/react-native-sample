@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, ListItem } from 'react-native-elements';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import _ from 'lodash';
 
 class CommentsList extends React.Component {
@@ -47,10 +47,10 @@ class CommentsList extends React.Component {
 
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     marginTop: -22
   }
-};
+});
 
 export default CommentsList;

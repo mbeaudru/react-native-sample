@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import {
-  View, ScrollView, InteractionManager, ActivityIndicator
+  View, ScrollView, InteractionManager, ActivityIndicator, StyleSheet
 } from 'react-native';
 import CommentItem from '../components/CommentItem';
 import TopBar from '../components/TopBar';
@@ -94,7 +94,7 @@ class CommentPage extends React.Component {
 
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1
   },
@@ -103,7 +103,7 @@ const styles = {
     justifyContent: 'center',
     marginTop: 100
   }
-};
+});
 
 export default connect(
   ({ comments }, ownProps) => {

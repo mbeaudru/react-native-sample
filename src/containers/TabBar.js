@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs, Tab, Icon } from 'react-native-elements';
 import MapScreen from '../containers/MapScreen';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import UserProfile from '../containers/UserProfile';
 import colors from '../utils/colors';
@@ -95,7 +95,7 @@ class TabBar extends React.Component {
 
 }
 
-const styles = {
+const styles = StyleSheet.create({
   tabBarStyle: {
     flex: 1,
     top: 0,
@@ -122,7 +122,7 @@ const styles = {
   tabTitle: {
     color: 'red'
   }
-};
+});
 
 export default connect(
   ({ users }) => {
