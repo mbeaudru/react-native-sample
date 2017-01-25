@@ -21,7 +21,7 @@ class UserProfile extends React.Component {
         {!this.props.profilePage &&
           <TopBar textValue="User Profile" onPress={() => Actions.pop()} />
         }
-        <ScrollView>
+        <ScrollView style={styles.scrollView}>
           <View style={styles.container}>
             <TouchableHighlight
               underlayColor={styles.container.backgroundColor}
@@ -217,7 +217,8 @@ const styles = StyleSheet.create({
   },
   followBtnText: {
     color: colors.primary2
-  }
+  },
+  scrollView: { marginTop: -1 }
 });
 
 export default connect(
