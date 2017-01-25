@@ -2,6 +2,9 @@ import * as types from '../utils/constants';
 import * as api from '../utils/api';
 import _ from 'lodash';
 
+/*
+  TODO: All the user management/auth must be done with Auth0.
+*/
 export function registerUser(user) {
   return dispatch => {
     const queryParams = {
@@ -90,22 +93,24 @@ export function fetchUserById(userId) {
   };
 }
 
+/*
+  TODO: Note: All this logic should be in server side and doesn't make sense
+  in a production app. We have to do this to compile with JSON-SERVER but
+  it should be done another way with a real API server.
+*/
 export function followUser(userToFollow) {
   return (dispatch, getState) => {
     const followed = !userToFollow.followed;
     const user = _.merge({}, userToFollow, { followed });
 
+    // First query -> Set the user boolean status "followed"
+    // This change is used for the button 'follow / unfollow'
     const queryParams = _.merge({}, api.headerToken(getState()), {
       method: "PUT",
       body: JSON.stringify(user),
       headers: {
         "Content-Type": "application/json"
       }
-    });
-
-    dispatch({
-      type: types.FETCH_USER,
-      user
     });
 
     fetch(api.USERS_$ID(user.id), queryParams)
@@ -118,8 +123,10 @@ export function followUser(userToFollow) {
       })
       .catch(err => console.error(err));
 
+    // This step is made to add/remove the user from the currentUser followed
+    // user list whether he is followed or not.
     const currentUserId = _.get(getState(), 'users.currentUser.id', null);
-    let currentUser = _.get(
+    const currentUser = _.get(
       getState(), ['users', 'hashMap', currentUserId], {}
     );
     const usersSeen = _.get(currentUser, 'seen', []);
@@ -136,11 +143,6 @@ export function followUser(userToFollow) {
       headers: {
         "Content-Type": "application/json"
       }
-    });
-
-    dispatch({
-      type: types.FETCH_USER,
-      user: currentUser
     });
 
     fetch(api.USERS_$ID(currentUserId), queryParams2)
