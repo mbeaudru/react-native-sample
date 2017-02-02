@@ -1,6 +1,8 @@
-# Contacts sample with React Native
+# Context and goal
 
-This app is an example of how you can create a simple project with React Native, coupled with some extra nice packages to handle routing, dataflow and UI elements.
+I have done this application for a school project and wanted to try to do a mobile app in using web technologies I am familiar with. Having none mobile background, it was a jump in the leap in the dark but in the same time it was really exciting.
+
+This app is made to be simple and may help people knowing React & Redux to get into creating mobile apps. It's made with React Native, coupled with some extra nice packages to handle routing, dataflow and UI elements.
 
 ## Main technologies used
 
