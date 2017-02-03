@@ -4,6 +4,10 @@ I have done this application for a school project and wanted to try to do a mobi
 
 This app is made to be simple and may help people knowing React & Redux to get into creating mobile apps. It's made with React Native, coupled with some extra nice packages to handle routing, dataflow and UI elements.
 
+## Preview
+
+![gif preview](https://raw.githubusercontent.com/mbeaudru/react-native-sample/master/assets/preview.gif)
+
 ## Main technologies used
 
 - [React Native](https://github.com/facebook/react-native)
