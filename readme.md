@@ -8,6 +8,8 @@ This app is made to be simple and may help people knowing React & Redux to get i
 
 ![gif preview](https://raw.githubusercontent.com/mbeaudru/react-native-sample/master/assets/preview.gif)
 
+> Note: 6MB size GIF, might take some time to load
+
 ## Main technologies used
 
 - [React Native](https://github.com/facebook/react-native)
