@@ -15,7 +15,7 @@ class LoginForm extends React.Component {
       <View style={styles.container}>
         <View style={styles.headerStyle}>
           <Icon name="people" size={100} color="white" />
-          <Text style={styles.appTitle}>WeChat</Text>
+          <Text style={styles.appTitle}>React Native Sample</Text>
         </View>
         <View style={styles.formSection}>
           <FormLabel labelStyle={styles.labelStyle}>
